@@ -1,0 +1,93 @@
+{
+  // Workbench (theme, positioning...)
+  "workbench.colorTheme": "One Dark Pro Darker",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.sideBar.location": "right",
+  "oneDarkPro.bold": true,
+  "oneDarkPro.vivid": true,
+  "files.autoSave": "onFocusChange",
+  // Editor (appearance, formatting & linting)
+  "editor.stickyScroll.maxLineCount": 3,
+  "editor.snippetSuggestions": "top",
+  "editor.fontFamily": "'Cascadia Code', Consolas, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.lineHeight": 2.2,
+  "editor.guides.bracketPairs": "active",
+  "editor.linkedEditing": true,
+  "editor.formatOnPaste": true,
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "eslint.probe": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "astro"
+  ],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "astro"
+  ],
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": [
+    // Runs Prettier, then ESLint
+    "source.formatDocument",
+    "source.organizeImports",
+    "source.fixAll.eslint"
+  ],
+  "editor.rulers": [80],
+  "editor.tabSize": 2,
+  "[html]": {
+    "editor.tabSize": 4,
+    "editor.wordWrapColumn": 100,
+    "editor.rulers": [100]
+  },
+  "[css]": {
+    "editor.codeActionsOnSave": [
+      // Runs Prettier, then StyleLint
+      "source.formatDocument",
+      "source.organizeImports",
+      "source.fixAll.stylelint"
+    ]
+  },
+  "[php]": {
+    "editor.tabSize": 4
+  },
+  "[markdown]": {
+    "editor.rulers": [100],
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    }
+  },
+  "prettier.documentSelectors": ["**/*.astro", "**/*.xml"],
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+  "stylelint.validate": ["css", "html", "astro"],
+  // Others
+  "notebook.output.wordWrap": true,
+  "notebook.markdown.lineHeight": 2.2,
+  "terminal.integrated.env.linux": {},
+  // Additional extensions
+  "console-ninja.featureSet": "Community",
+  "prettier.singleQuote": true,
+  "prettier.proseWrap": "always",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "blade.format.enable": true,
+  "console-ninja.toolsToEnableSupportAutomaticallyFor": {
+    "live-preview-extension": true,
+    "live-server-extension": true
+  },
+  "console-ninja.predictiveLoggingEnabled": false,
+  "terminal.integrated.env.windows": {},
+  "git.confirmSync": false
+}
+
