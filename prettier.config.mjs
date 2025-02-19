@@ -6,12 +6,4 @@
  */
 export default {
   singleQuote: true,
-  overrides: [
-    {
-      files: '*.jsx',
-      options: {
-        printWidth: 100,
-      },
-    },
-  ],
 };
