@@ -1,3 +1,3 @@
 export default function App() {
-  return;
+  return <span className="material-icons">face</span>;
 }
