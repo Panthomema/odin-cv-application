@@ -1,1 +1,4 @@
-/* Styles for App component */
+.app {
+  max-width: 1280px;
+  padding: 1em 2em;
+}
