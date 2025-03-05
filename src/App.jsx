@@ -1,3 +1,9 @@
+import Header from "./Header";
+
 export default function App() {
-  return <span className="material-icons">face</span>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 }
