@@ -74,8 +74,6 @@ html {
   color: var(--color-text);
 }
 
-
-
 #root {
   flex: 1;
   display: flex;

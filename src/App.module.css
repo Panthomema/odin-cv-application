@@ -3,8 +3,32 @@
   max-width: 1800px;
   padding: var(--spacing-layout);
   display: flex;
+  flex-direction: column;
   gap: var(--spacing-layout);
-  flex-wrap: wrap;
+}
+
+@media only screen and (width >= 800px) {
+  .app {
+    flex-direction: row;
+    height: 100dvh;
+    padding: 0 var(--spacing-layout);
+  }
+
+  .column {
+    padding: var(--spacing-layout) 0;
+    overflow-y: auto;
+    min-height: 0;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;   
+  }
+
+  .column::-webkit-scrollbar {
+    display: none;
+  }
+
+  .controls-wrapper {
+    border-radius: 5px;
+  }
 }
 
 .controls-wrapper {

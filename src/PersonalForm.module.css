@@ -1,4 +1,10 @@
 .form {
-  height: 350px;
+  height: 700px;
   min-width: 300px;
+  border: 2px solid blue;
+}
+
+.form > * {
+  height: 100%;
+  width: 100%;
 }

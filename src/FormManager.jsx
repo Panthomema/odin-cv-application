@@ -3,7 +3,7 @@ import styles from './FormManager.module.css';
 
 export default function FormManager() {
   return (
-    <nav className={styles.nav}>
+    <nav className={styles['form-manager']}>
       <PersonalForm />
     </nav>
   );
