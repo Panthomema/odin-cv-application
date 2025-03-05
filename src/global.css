@@ -57,3 +57,44 @@
     }
   }
 }
+
+:root {
+  --color-bg: #f3f1ec;
+  --color-ui: #fff;
+  --color-text: #333;
+  --color-text-secondary: #555;
+  --color-accent: #be4bdb;
+}
+
+html {
+  font-size: clamp(14px, 2vw, 18px);
+  font-family: 'Open Sans', sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+#root {
+  max-width: 1280px;
+  padding: 1em 2em;
+}
+
+h1 {
+  font-weight: 600;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+}
+
+button {
+  cursor: pointer;
+}
