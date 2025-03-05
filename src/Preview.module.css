@@ -1,4 +1,5 @@
 .div {
   aspect-ratio: 1 / 1.414;
+  width: 100%;
   background-color: var(--color-ui);
 }

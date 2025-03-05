@@ -1,4 +1,21 @@
 .app {
-  max-width: 1280px;
-  padding: 1em 2em;
+  flex: 1;
+  max-width: 1800px;
+  padding: var(--spacing-layout);
+  display: flex;
+  gap: var(--spacing-layout);
+  flex-wrap: wrap;
+}
+
+.controls-wrapper {
+  flex-basis: 400px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-layout);
+}
+
+.preview-wrapper {
+  flex-basis: 500px;
+  flex-grow: 1.5;
 }

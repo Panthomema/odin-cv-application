@@ -6,9 +6,13 @@ import Preview from './Preview';
 export default function App() {
   return (
     <div className={styles.app}>
-      <Header />
-      <FormManager />
-      <Preview />
+      <div className={styles['controls-wrapper']}>
+        <Header />
+        <FormManager />
+      </div>
+      <div className={styles['preview-wrapper']}>
+        <Preview />
+      </div>
     </div>
   );
 }

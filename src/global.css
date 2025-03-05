@@ -64,6 +64,7 @@
   --color-text: #333;
   --color-text-secondary: #555;
   --color-accent: #be4bdb;
+  --spacing-layout: 2em;
 }
 
 html {
@@ -73,13 +74,12 @@ html {
   color: var(--color-text);
 }
 
-body {
-  display: flex;
-  justify-content: center;
-}
+
 
 #root {
+  flex: 1;
   display: flex;
+  justify-content: center;
 }
 
 h1 {

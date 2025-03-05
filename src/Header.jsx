@@ -1,5 +1,13 @@
 import Card from "./Card";
+import style from './Header.module.css';
 
 export default function Header() {
-  return <Card><h1>Easy CV</h1></Card>
+  return (
+    <header className={style.header}>
+      <Card>
+        <h1>Easy CV</h1>
+      </Card>
+    </header>
+  );
+  
 }
