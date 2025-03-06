@@ -1,13 +1,10 @@
-import Card from "./Card";
-import style from './Header.module.css';
+import styles from './Header.module.css';
+import { card } from './Utils.module.css'
 
 export default function Header() {
   return (
-    <header className={style.header}>
-      <Card>
-        <h1>Easy CV</h1>
-      </Card>
+    <header className={`${card} ${styles.header}`}>
+      <h1>Easy CV</h1>
     </header>
   );
-  
 }

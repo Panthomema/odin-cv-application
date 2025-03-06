@@ -7,8 +7,12 @@ export default function App() {
   return (
     <div className={styles.app}>
       <div className={`${styles.column} ${styles['controls-wrapper']}`}>
-        <Header />
-        <FormManager />
+        <div className={styles['header-wrapper']}>
+          <Header />
+        </div>
+        <div className={styles['forms-wrapper']}>
+          <FormManager />
+        </div>
       </div>
       <div className={`${styles.column} ${styles['preview-wrapper']}`}>
         <Preview />

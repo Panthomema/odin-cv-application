@@ -5,6 +5,7 @@ export default function FormManager() {
   return (
     <nav className={styles['form-manager']}>
       <PersonalForm />
+      <PersonalForm />
     </nav>
   );
 }
