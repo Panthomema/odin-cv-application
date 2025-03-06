@@ -23,6 +23,10 @@
   padding: 0 var(--spacing-layout);
 }
 
+.preview-wrapper {
+  padding-bottom: var(--spacing-layout);
+}
+
 
 @media only screen and (width >= 800px) {
   .app {
