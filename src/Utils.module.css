@@ -1,8 +1,19 @@
 .card {
   background-color: var(--color-ui);
   border-radius: 5px;
-  padding: 1em;
+  padding: 1.5em;
   box-shadow:
     0 0.1em 0.2em rgb(0 0 0 / 4%),
     0 0.05em 0.1em rgb(0 0 0 / 3%);
+}
+
+.text-secondary {
+  font-size: 0.7rem;
+  color: var(--color-text-secondary);
+}
+
+.form-error {
+  font-size: 0.7rem;
+  height: 1em;
+  color: var(--color-error);
 }
