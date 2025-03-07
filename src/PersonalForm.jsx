@@ -1,9 +1,9 @@
 import styles from './PersonalForm.module.css';
 import utils from './Utils.module.css';
 
-export default function PersonalForm({ data }) {
+export default function PersonalForm({ data, handleSubmit }) {
   return (
-    <form className={`${utils.card} ${styles.form}`}>
+    <form className={`${utils.card} ${styles.form}`} onSubmit={handleSubmit}>
       <h2>Edit Personal Details</h2>
       <div className={styles['form-group']}>
         <label htmlFor="full-name">
@@ -14,7 +14,7 @@ export default function PersonalForm({ data }) {
           name="full-name"
           id="full-name"
           className={styles.input}
-          value={data?.fullName}
+          defaultValue={data?.fullName}
         />
         <span className={utils['form-error']}></span>
       </div>
@@ -27,7 +27,7 @@ export default function PersonalForm({ data }) {
           name="email"
           id="email"
           className={styles.input}
-          value={data?.email}
+          defaultValue={data?.email}
         />
         <span className={utils['form-error']}></span>
       </div>
@@ -41,7 +41,7 @@ export default function PersonalForm({ data }) {
           name="phone-number"
           id="phone-number"
           className={styles.input}
-          value={data?.phoneNumber}
+          defaultValue={data?.phoneNumber}
         />
         <span className={utils['form-error']}></span>
       </div>
@@ -54,7 +54,7 @@ export default function PersonalForm({ data }) {
           name="location"
           id="location"
           className={styles.input}
-          value={data?.location}
+          defaultValue={data?.location}
         />
         <span className={utils['form-error']}></span>
       </div>
