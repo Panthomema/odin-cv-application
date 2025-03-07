@@ -16,16 +16,16 @@ export default function App() {
 
   return (
     <div className={styles.app}>
-      <div className={`${styles.column} ${styles['controls-wrapper']}`}>
-        <div className={styles['header-wrapper']}>
+      <div className={`${styles.column} ${styles.controlsWrapper}`}>
+        <div className={styles.headerWrapper}>
           <Header />
         </div>
-        <div className={styles['forms-wrapper']}>
+        <div className={styles.formsWrapper}>
           <FormManager resumeData={resumeData} setResumeData={setResumeData} />
         </div>
       </div>
-      <div className={`${styles.column} ${styles['preview-wrapper']}`}>
-        <Preview />
+      <div className={`${styles.column} ${styles.previewWrapper}`}>
+        <Preview resumeData={resumeData} />
       </div>
     </div>
   );

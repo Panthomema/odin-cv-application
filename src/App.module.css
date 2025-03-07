@@ -6,27 +6,25 @@
   gap: var(--spacing-layout);
 }
 
-.controls-wrapper {
+.controlsWrapper {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-layout);
 }
 
-.header-wrapper {
+.headerWrapper {
   position: sticky;
   top: 0;
 }
 
-.forms-wrapper,
-.preview-wrapper
-{
+.formsWrapper,
+.previewWrapper {
   padding: 0 var(--spacing-layout);
 }
 
-.preview-wrapper {
+.previewWrapper {
   padding-bottom: var(--spacing-layout);
 }
-
 
 @media only screen and (width >= 800px) {
   .app {
@@ -46,22 +44,22 @@
     display: none;
   }
 
-  .header-wrapper {
+  .headerWrapper {
     padding-top: var(--spacing-layout);
     background-color: var(--color-bg);
   }
 
-  .forms-wrapper {
+  .formsWrapper {
     padding: 0;
   }
 
-  .preview-wrapper {
+  .previewWrapper {
     padding: var(--spacing-layout) 0;
     flex-basis: 500px;
     flex-grow: 1.5;
   }
 
-  .controls-wrapper {
+  .controlsWrapper {
     padding-bottom: var(--spacing-layout);
     flex-basis: 400px;
     flex-grow: 1;

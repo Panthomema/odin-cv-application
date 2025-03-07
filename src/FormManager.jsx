@@ -10,7 +10,7 @@ export default function FormManager({ resumeData, setResumeData }) {
   }
 
   return (
-    <nav className={styles['form-manager']}>
+    <nav className={styles.formManager}>
       <PersonalForm data={resumeData} handleSubmit={handleSubmit}/>
     </nav>
   );

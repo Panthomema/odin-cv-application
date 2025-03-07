@@ -5,22 +5,22 @@ export default function PersonalForm({ data, handleSubmit }) {
   return (
     <form className={`${utils.card} ${styles.form}`} onSubmit={handleSubmit}>
       <h2>Edit Personal Details</h2>
-      <div className={styles['form-group']}>
-        <label htmlFor="full-name">
-          Full Name <span className={utils['text-secondary']}>required</span>
+      <div className={styles.formGroup}>
+        <label htmlFor="fullName">
+          Full Name <span className={utils.textSecondary}>required</span>
         </label>
         <input
           type="text"
-          name="full-name"
-          id="full-name"
+          name="fullName"
+          id="fullName"
           className={styles.input}
           defaultValue={data?.fullName}
         />
-        <span className={utils['form-error']}></span>
+        <span className={utils.formError}></span>
       </div>
-      <div className={styles['form-group']}>
+      <div className={styles.formGroup}>
         <label htmlFor="email">
-          Email <span className={utils['text-secondary']}>recommended</span>
+          Email <span className={utils.textSecondary}>recommended</span>
         </label>
         <input
           type="email"
@@ -29,25 +29,25 @@ export default function PersonalForm({ data, handleSubmit }) {
           className={styles.input}
           defaultValue={data?.email}
         />
-        <span className={utils['form-error']}></span>
+        <span className={utils.formError}></span>
       </div>
-      <div className={styles['form-group']}>
-        <label htmlFor="phone-number">
+      <div className={styles.formGroup}>
+        <label htmlFor="phoneNumber">
           Phone Number{' '}
-          <span className={utils['text-secondary']}>recommended</span>
+          <span className={utils.textSecondary}>recommended</span>
         </label>
         <input
           type="tel"
-          name="phone-number"
-          id="phone-number"
+          name="phoneNumber"
+          id="phoneNumber"
           className={styles.input}
           defaultValue={data?.phoneNumber}
         />
-        <span className={utils['form-error']}></span>
+        <span className={utils.formError}></span>
       </div>
-      <div className={styles['form-group']}>
+      <div className={styles.formGroup}>
         <label htmlFor="location">
-          Location <span className={utils['text-secondary']}>optional</span>
+          Location <span className={utils.textSecondary}>optional</span>
         </label>
         <input
           type="text"
@@ -56,7 +56,7 @@ export default function PersonalForm({ data, handleSubmit }) {
           className={styles.input}
           defaultValue={data?.location}
         />
-        <span className={utils['form-error']}></span>
+        <span className={utils.formError}></span>
       </div>
       <div className={styles['buttons-area']}>
         <button
