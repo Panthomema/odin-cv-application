@@ -8,10 +8,6 @@
   cursor: pointer;
 }
 
-.unknown {
-  color: var(--color-text-placeholder);
-}
-
 .personalData {
   display: flex;
   flex-direction: column;

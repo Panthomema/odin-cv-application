@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import PersonalDataListItem from '../PersonalDataListItem/PersonalDataListItem';
 import PersonalForm from '../PersonalForm/PersonalForm';
-import styles from './FormManager.module.css';
 import utils from '../styles/Utils.module.css';
+import styles from './FormManager.module.css';
 
 export default function FormManager({ resumeData, setResumeData }) {
   const [status, setStatus] = useState('viewing');
@@ -12,7 +13,7 @@ export default function FormManager({ resumeData, setResumeData }) {
 
   const handleCancel = () => {
     setStatus('viewing');
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,7 +24,13 @@ export default function FormManager({ resumeData, setResumeData }) {
   };
 
   if (status === 'editing') {
-    return <PersonalForm data={resumeData} onSubmit={handleSubmit} onCancel={handleCancel}/>;
+    return (
+      <PersonalForm
+        data={resumeData}
+        onSubmit={handleSubmit}
+        onCancel={handleCancel}
+      />
+    );
   }
 
   return (
@@ -38,38 +45,21 @@ export default function FormManager({ resumeData, setResumeData }) {
           <h2 className={styles.unknown}>Your name</h2>
         )}
         <ul>
-          {resumeData.email != '' ? (
-            <li>
-              <span className="material-symbols-outlined">mail</span>
-              {resumeData.email}
-            </li>
-          ) : (
-            <li className={styles.unknown}>
-              <span className="material-symbols-outlined">mail</span>Email
-            </li>
-          )}
-          {resumeData.phoneNumber != '' ? (
-            <li>
-              <span className="material-symbols-outlined">phone</span>
-              {resumeData.phoneNumber}
-            </li>
-          ) : (
-            <li className={styles.unknown}>
-              <span className="material-symbols-outlined">phone</span>Phone
-              Number
-            </li>
-          )}
-          {resumeData.location != '' ? (
-            <li>
-              <span className="material-symbols-outlined">location_on</span>
-              {resumeData.location}
-            </li>
-          ) : (
-            <li className={styles.unknown}>
-              <span className="material-symbols-outlined">location_on</span>
-              Location
-            </li>
-          )}
+          <PersonalDataListItem
+            label="Email"
+            iconName="email"
+            value={resumeData.email}
+          />
+          <PersonalDataListItem
+            label="Phone Number"
+            iconName="phone"
+            value={resumeData.phoneNumber}
+          />
+          <PersonalDataListItem
+            label="Location"
+            iconName="location_on"
+            value={resumeData.location}
+          />
         </ul>
       </div>
     </nav>
