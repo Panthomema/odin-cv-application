@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './Preview.module.css';
 
 const A4_WIDTH = 794;
+const A4_HEIGHT = 1123;
 
 export default function Preview({ resumeData }) {
   const [scale, setScale] = useState(1);
@@ -13,10 +14,12 @@ export default function Preview({ resumeData }) {
 
     const updateScale = () => {
       if (containerDiv) {
-        const containerWidth =
-          containerDiv.getBoundingClientRect().width;
-        const newScale = containerWidth / A4_WIDTH;
+        const containerRect = containerDiv.getBoundingClientRect();
+        const newScale = containerRect.width / A4_WIDTH;
         setScale(newScale);
+
+        // Adjust the container height (it would stay 1123px otherwise)
+        containerDiv.style.height = `${A4_HEIGHT * newScale}px`;
       }
     };
 
@@ -33,9 +36,7 @@ export default function Preview({ resumeData }) {
 
     // Clean up
     return () => {
-      if (containerDiv) {
-        resizeObserver.unobserve(containerDiv);
-      }
+      resizeObserver.unobserve(containerDiv);
       resizeObserver.disconnect();
     };
   }, []);
