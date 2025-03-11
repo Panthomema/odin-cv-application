@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import PersonalForm from '../PersonalForm/PersonalForm';
 import styles from './FormManager.module.css';
-import PersonalForm from './PersonalForm';
-import utils from './Utils.module.css';
+import utils from '../styles/Utils.module.css';
 
 export default function FormManager({ resumeData, setResumeData }) {
   const [status, setStatus] = useState('viewing');

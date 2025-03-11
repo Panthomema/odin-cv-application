@@ -1,5 +1,5 @@
 import styles from './PersonalForm.module.css';
-import utils from './Utils.module.css';
+import utils from '../styles/Utils.module.css';
 
 export default function PersonalForm({ data, onSubmit, onCancel }) {
   return (

@@ -1,5 +1,5 @@
 import styles from './Header.module.css';
-import { card } from './Utils.module.css'
+import { card } from '../styles/Utils.module.css'
 
 export default function Header() {
   return (

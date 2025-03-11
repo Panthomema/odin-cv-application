@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import styles from './App.module.css';
-import FormManager from './FormManager';
-import Header from './Header';
-import Preview from './Preview';
+import FormManager from '../FormManager/FormManager';
+import Header from '../Header/Header';
+import Preview from '../Preview/Preview';
 
 export default function App() {
   const dataBlueprint = {
