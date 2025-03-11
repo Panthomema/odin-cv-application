@@ -1,5 +1,37 @@
-.preview {
-  aspect-ratio: 1 / 1.414;
+.previewContainer {
   width: 100%;
-  background-color: var(--color-ui);
+}
+
+.preview {
+  width: 794px; /* A4 width at 96 DPI */
+  height: 1123px; /* A4 height at 96 DPI */
+  background-color: #fff;
+  overflow: hidden;
+  position: relative;
+  font-size: 12pt;
+  transform-origin: top left;
+}
+
+.personal {
+  background-color: var(--color-accent);
+  color: #fff;
+  padding: 1em;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.contact {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-wrap: nowrap;
+}
+
+.contact > li {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
 }
