@@ -3,3 +3,23 @@
   flex-direction: column;
   gap: var(--spacing-layout);
 }
+
+.formManager div {
+  cursor: pointer;
+}
+
+.unknown {
+  color: var(--color-text-placeholder);
+}
+
+.formManager ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.formManager li {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+}

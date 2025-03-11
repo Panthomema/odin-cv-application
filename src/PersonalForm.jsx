@@ -1,9 +1,12 @@
 import styles from './PersonalForm.module.css';
 import utils from './Utils.module.css';
 
-export default function PersonalForm({ data, handleSubmit }) {
+export default function PersonalForm({ data, onSubmit, onCancel }) {
   return (
-    <form className={`${utils.card} ${styles.form}`} onSubmit={handleSubmit}>
+    <form
+      className={`${utils.card} ${utils.cardLayout}`}
+      onSubmit={onSubmit}
+    >
       <h2>Edit Personal Details</h2>
       <div className={styles.formGroup}>
         <label htmlFor="fullName">
@@ -33,8 +36,7 @@ export default function PersonalForm({ data, handleSubmit }) {
       </div>
       <div className={styles.formGroup}>
         <label htmlFor="phoneNumber">
-          Phone Number{' '}
-          <span className={utils.textSecondary}>recommended</span>
+          Phone Number <span className={utils.textSecondary}>recommended</span>
         </label>
         <input
           type="tel"
@@ -62,6 +64,7 @@ export default function PersonalForm({ data, handleSubmit }) {
         <button
           type="button"
           className={`${styles.button} ${styles.buttonSecondary}`}
+          onClick={onCancel}
         >
           Cancel
         </button>
