@@ -4,7 +4,7 @@ import PersonalForm from '../PersonalForm/PersonalForm';
 import utils from '../styles/Utils.module.css';
 import styles from './FormManager.module.css';
 
-export default function FormManager({ resumeData, setResumeData }) {
+export default function FormManager({ resumeData, onFormSubmit }) {
   const [status, setStatus] = useState('viewing');
 
   const handleClick = () => {
@@ -19,8 +19,8 @@ export default function FormManager({ resumeData, setResumeData }) {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
+    onFormSubmit(data);
     setStatus('viewing');
-    setResumeData(data);
   };
 
   if (status === 'editing') {

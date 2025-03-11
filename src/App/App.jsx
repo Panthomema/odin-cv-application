@@ -21,7 +21,7 @@ export default function App() {
           <Header />
         </div>
         <div className={styles.formsWrapper}>
-          <FormManager resumeData={resumeData} setResumeData={setResumeData} />
+          <FormManager resumeData={resumeData} onFormSubmit={setResumeData} />
         </div>
       </div>
       <div className={`${styles.column} ${styles.previewWrapper}`}>
