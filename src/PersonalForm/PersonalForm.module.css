@@ -4,19 +4,6 @@
   gap: var(--spacing-ui);
 }
 
-.formGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-}
-
-.input {
-  font-size: 0.8rem;
-  border-radius: 2px;
-  background-color: var(--color-form-elements);
-  padding: 0.4em 0.6em;
-}
-
 .buttonsArea {
   display: flex;
   justify-content: end;

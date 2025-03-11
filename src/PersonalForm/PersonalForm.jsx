@@ -1,65 +1,39 @@
-import styles from './PersonalForm.module.css';
+import FormField from '../FormField/FormField';
 import utils from '../styles/Utils.module.css';
+import styles from './PersonalForm.module.css';
 
 export default function PersonalForm({ data, onSubmit, onCancel }) {
   return (
-    <form
-      className={`${utils.card} ${styles.form}`}
-      onSubmit={onSubmit}
-    >
+    <form className={`${utils.card} ${styles.form}`} onSubmit={onSubmit}>
       <h2>Edit Personal Details</h2>
-      <div className={styles.formGroup}>
-        <label htmlFor="fullName">
-          Full Name <span className={utils.textSecondary}>required</span>
-        </label>
-        <input
-          type="text"
-          name="fullName"
-          id="fullName"
-          className={styles.input}
-          defaultValue={data?.fullName}
-        />
-        <span className={utils.formError}></span>
-      </div>
-      <div className={styles.formGroup}>
-        <label htmlFor="email">
-          Email <span className={utils.textSecondary}>recommended</span>
-        </label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          className={styles.input}
-          defaultValue={data?.email}
-        />
-        <span className={utils.formError}></span>
-      </div>
-      <div className={styles.formGroup}>
-        <label htmlFor="phoneNumber">
-          Phone Number <span className={utils.textSecondary}>recommended</span>
-        </label>
-        <input
-          type="tel"
-          name="phoneNumber"
-          id="phoneNumber"
-          className={styles.input}
-          defaultValue={data?.phoneNumber}
-        />
-        <span className={utils.formError}></span>
-      </div>
-      <div className={styles.formGroup}>
-        <label htmlFor="location">
-          Location <span className={utils.textSecondary}>optional</span>
-        </label>
-        <input
-          type="text"
-          name="location"
-          id="location"
-          className={styles.input}
-          defaultValue={data?.location}
-        />
-        <span className={utils.formError}></span>
-      </div>
+      <FormField
+        name="fullName"
+        type="text"
+        label="Full Name"
+        tag="required"
+        value={data?.fullName}
+      />
+      <FormField
+        name="email"
+        type="email"
+        label="Email"
+        tag="recommended"
+        value={data?.email}
+      />
+      <FormField
+        name="phoneNumber"
+        type="tel"
+        label="Phone Number"
+        tag="recommended"
+        value={data?.phoneNumber}
+      />
+      <FormField
+        name="location"
+        type="text"
+        label="Location"
+        tag="optional"
+        value={data?.location}
+      />
       <div className={styles.buttonsArea}>
         <button
           type="button"
