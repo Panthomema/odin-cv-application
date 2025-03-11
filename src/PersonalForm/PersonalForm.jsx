@@ -4,7 +4,7 @@ import utils from '../styles/Utils.module.css';
 export default function PersonalForm({ data, onSubmit, onCancel }) {
   return (
     <form
-      className={`${utils.card} ${utils.cardLayout}`}
+      className={`${utils.card} ${styles.form}`}
       onSubmit={onSubmit}
     >
       <h2>Edit Personal Details</h2>

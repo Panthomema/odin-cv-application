@@ -29,7 +29,7 @@ export default function FormManager({ resumeData, setResumeData }) {
   return (
     <nav className={styles.formManager}>
       <div
-        className={`${utils.card} ${utils.cardLayout}`}
+        className={`${utils.card} ${styles.personalData}`}
         onClick={handleClick}
       >
         {resumeData.fullName != '' ? (

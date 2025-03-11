@@ -12,13 +12,19 @@
   color: var(--color-text-placeholder);
 }
 
-.formManager ul {
+.personalData {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-ui);
+}
+
+.personalData ul {
   display: flex;
   flex-direction: column;
   gap: 1em;
 }
 
-.formManager li {
+.personalData li {
   display: flex;
   align-items: center;
   gap: 0.7em;

@@ -64,6 +64,7 @@
   --color-accent: #be4bdb;
   --color-error: #e03131;
   --spacing-layout: 2em;
+  --spacing-ui: 1.25em;
 }
 
 html {
