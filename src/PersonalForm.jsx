@@ -58,16 +58,16 @@ export default function PersonalForm({ data, handleSubmit }) {
         />
         <span className={utils.formError}></span>
       </div>
-      <div className={styles['buttons-area']}>
+      <div className={styles.buttonsArea}>
         <button
           type="button"
-          className={`${styles.button} ${styles['button-secondary']}`}
+          className={`${styles.button} ${styles.buttonSecondary}`}
         >
           Cancel
         </button>
         <button
           type="submit"
-          className={`${styles.button} ${styles['button-primary']}`}
+          className={`${styles.button} ${styles.buttonPrimary}`}
         >
           Save
         </button>
