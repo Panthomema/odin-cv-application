@@ -14,6 +14,10 @@
   gap: var(--spacing-ui);
 }
 
+.personalData h2 {
+  text-wrap: wrap;
+}
+
 .personalData ul {
   display: flex;
   flex-direction: column;

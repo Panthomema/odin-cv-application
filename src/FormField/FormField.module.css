@@ -10,3 +10,7 @@
   background-color: var(--color-form-elements);
   padding: 0.4em 0.6em;
 }
+
+.input:invalid:not(:focus) {
+  outline: 2px solid var(--color-error);
+}

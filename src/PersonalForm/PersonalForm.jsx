@@ -7,6 +7,36 @@ export default function PersonalForm({ data, onSubmit, onCancel }) {
   const [errors, setErrors] = useState({});
   const formRef = useRef(null);
 
+  const validationErrorMessages = {
+    fullName: {
+      valueMissing: 'Full name is required.',
+      tooShort: 'Full name must be at least 2 characters.',
+      tooLong: 'Full name cannot exceed 40 characters.',
+    },
+    email: {
+      typeMismatch: 'Please enter a valid email address.',
+      tooLong: 'Email cannot exceed 320 characters.',
+    },
+    phoneNumber: {
+      patternMismatch: 'Please provide a valid phone number.',
+    },
+    location: {
+      tooShort: 'Location must be at least 2 characters.',
+      tooLong: 'Location cannot exceed 100 characters.',
+    },
+  };
+
+  const getErrorMessage = (field) => {
+    const rules = validationErrorMessages[field.name];
+    if (!rules) return null;
+
+    for (const [rule, message] of Object.entries(rules)) {
+      if (field.validity[rule]) return message;
+    }
+
+    return null;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = formRef.current;
@@ -17,7 +47,8 @@ export default function PersonalForm({ data, onSubmit, onCancel }) {
     const newErrors = {};
     Array.from(form.elements).forEach((field) => {
       if (field.tagName === 'INPUT' && !field.checkValidity()) {
-        newErrors[field.name] = field.validationMessage;
+        newErrors[field.name] =
+          getErrorMessage(field) ?? field.validationMessage;
       }
     });
 
@@ -45,7 +76,7 @@ export default function PersonalForm({ data, onSubmit, onCancel }) {
         tag="required"
         value={data?.fullName}
         error={errors.fullName}
-        constraints={{ required: true, minLength: 2, maxLength: 60 }}
+        constraints={{ required: true, minLength: 2, maxLength: 40 }}
       />
       <FormField
         name="email"
