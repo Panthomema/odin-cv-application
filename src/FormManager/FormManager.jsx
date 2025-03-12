@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import PersonalDataListItem from '../PersonalDataListItem/PersonalDataListItem';
 import PersonalForm from '../PersonalForm/PersonalForm';
 import utils from '../styles/Utils.module.css';
 import styles from './FormManager.module.css';
@@ -17,7 +16,9 @@ export default function FormManager({ resumeData, onFormSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    const form = e.target;
+    
+    const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
     onFormSubmit(data);
     setStatus('viewing');
@@ -42,7 +43,7 @@ export default function FormManager({ resumeData, onFormSubmit }) {
         {resumeData.fullName != '' ? (
           <h2>{resumeData.fullName}</h2>
         ) : (
-          <h2 className={styles.unknown}>Your name</h2>
+          <h2 className={styles.placeholderText}>Your name</h2>
         )}
         <ul>
           <PersonalDataListItem
@@ -63,5 +64,20 @@ export default function FormManager({ resumeData, onFormSubmit }) {
         </ul>
       </div>
     </nav>
+  );
+}
+
+
+function PersonalDataListItem({ label, iconName, value }) {
+  return value != '' ? (
+    <li>
+      <span className="material-symbols-outlined">{iconName}</span>
+      {value}
+    </li>
+  ) : (
+    <li className={styles.placeholderText}>
+      <span className="material-symbols-outlined">{iconName}</span>
+      {label}
+    </li>
   );
 }
