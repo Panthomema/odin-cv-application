@@ -20,3 +20,7 @@
   color: var(--color-ui);
   font-weight: 600;
 }
+
+.buttonSecondary {
+  color: var(--color-text-secondary);
+}

@@ -1,7 +1,15 @@
-import styles from './FormField.module.css';
 import utils from '../styles/Utils.module.css';
+import styles from './FormField.module.css';
 
-export default function FormField({ name, type, label, tag, value }) {
+export default function FormField({
+  name,
+  type,
+  label,
+  tag,
+  value,
+  error,
+  constraints = {},
+}) {
   return (
     <div className={styles.formField}>
       <label htmlFor={name}>
@@ -13,8 +21,9 @@ export default function FormField({ name, type, label, tag, value }) {
         id={name}
         className={styles.input}
         defaultValue={value}
+        {...constraints}
       />
-      <span className={utils.formError}></span>
+      <span className={utils.formError}>{error}</span>
     </div>
   );
 }

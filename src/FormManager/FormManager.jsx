@@ -14,12 +14,7 @@ export default function FormManager({ resumeData, onFormSubmit }) {
     setStatus('viewing');
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
+  const handleSubmit = (data) => {
     onFormSubmit(data);
     setStatus('viewing');
   };
