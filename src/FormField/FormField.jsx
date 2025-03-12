@@ -7,8 +7,9 @@ export default function FormField({
   label,
   tag,
   value,
-  error,
+  onBlur,
   constraints = {},
+  error,
 }) {
   return (
     <div className={styles.formField}>
@@ -21,6 +22,7 @@ export default function FormField({
         id={name}
         className={styles.input}
         defaultValue={value}
+        onBlur={onBlur}
         {...constraints}
       />
       <span className={utils.formError}>{error}</span>

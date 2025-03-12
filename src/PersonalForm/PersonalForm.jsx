@@ -37,6 +37,20 @@ export default function PersonalForm({ data, onSubmit, onCancel }) {
     return null;
   };
 
+  const handleBlur = (e) => {
+    const field = e.target;
+    if (field.tagName !== 'INPUT') return;
+
+    const errorMessage = !field.checkValidity()
+      ? (getErrorMessage(field) ?? field.validationMessage)
+      : null;
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [field.name]: errorMessage,
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = formRef.current;
@@ -75,8 +89,9 @@ export default function PersonalForm({ data, onSubmit, onCancel }) {
         label="Full Name"
         tag="required"
         value={data?.fullName}
-        error={errors.fullName}
+        onBlur={handleBlur}
         constraints={{ required: true, minLength: 2, maxLength: 40 }}
+        error={errors.fullName}
       />
       <FormField
         name="email"
@@ -84,8 +99,9 @@ export default function PersonalForm({ data, onSubmit, onCancel }) {
         label="Email"
         tag="recommended"
         value={data?.email}
-        error={errors.email}
+        onBlur={handleBlur}
         constraints={{ maxLength: 320 }}
+        error={errors.email}
       />
       <FormField
         name="phoneNumber"
@@ -93,8 +109,9 @@ export default function PersonalForm({ data, onSubmit, onCancel }) {
         label="Phone Number"
         tag="recommended"
         value={data?.phoneNumber}
-        error={errors.phoneNumber}
+        onBlur={handleBlur}
         constraints={{ pattern: '\\+?[0-9]{7,15}' }}
+        error={errors.phoneNumber}
       />
       <FormField
         name="location"
@@ -102,8 +119,9 @@ export default function PersonalForm({ data, onSubmit, onCancel }) {
         label="Location"
         tag="optional"
         value={data?.location}
-        error={errors.location}
+        onBlur={handleBlur}
         constraints={{ minLength: 2, maxLength: 100 }}
+        error={errors.location}
       />
       <div className={styles.buttonsArea}>
         <button
