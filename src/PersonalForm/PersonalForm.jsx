@@ -1,11 +1,9 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import FormField from '../FormField/FormField';
-import utils from '../styles/Utils.module.css';
-import styles from './PersonalForm.module.css';
+import Form from '../Form/Form';
 
 export default function PersonalForm({ data, onSubmit, onCancel }) {
   const [errors, setErrors] = useState({});
-  const formRef = useRef(null);
 
   const validationErrorMessages = {
     fullName: {
@@ -53,7 +51,7 @@ export default function PersonalForm({ data, onSubmit, onCancel }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const form = formRef.current;
+    const form = e.target;
 
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
@@ -76,13 +74,11 @@ export default function PersonalForm({ data, onSubmit, onCancel }) {
   };
 
   return (
-    <form
-      ref={formRef}
-      className={`${utils.card} ${styles.form}`}
+    <Form
+      title="Edit Personal Details"
       onSubmit={handleSubmit}
-      noValidate
+      onCancel={onCancel}
     >
-      <h2>Edit Personal Details</h2>
       <FormField
         name="fullName"
         type="text"
@@ -123,21 +119,6 @@ export default function PersonalForm({ data, onSubmit, onCancel }) {
         constraints={{ minLength: 2, maxLength: 100 }}
         error={errors.location}
       />
-      <div className={styles.buttonsArea}>
-        <button
-          type="button"
-          className={`${styles.button} ${styles.buttonSecondary}`}
-          onClick={onCancel}
-        >
-          Cancel
-        </button>
-        <button
-          type="submit"
-          className={`${styles.button} ${styles.buttonPrimary}`}
-        >
-          Save
-        </button>
-      </div>
-    </form>
+    </Form>
   );
 }
