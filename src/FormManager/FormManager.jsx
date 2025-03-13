@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useState } from 'react';
-import PersonalDetailsForm from '../PersonalDetailsForm/PersonalDetailsForm';
+import EditPersonalDetailsForm from '../EditPersonalDetailsForm/EditPersonalDetailsForm';
 import utils from '../styles/Utils.module.css';
 import styles from './FormManager.module.css';
 
@@ -8,7 +8,7 @@ export default function FormManager({ resumeData, onFormSubmit }) {
   const [status, setStatus] = useState('viewing');
 
   const handleClick = () => {
-    setStatus('editing');
+    setStatus('editing-personal');
   };
 
   const handleCancel = () => {
@@ -20,9 +20,9 @@ export default function FormManager({ resumeData, onFormSubmit }) {
     setStatus('viewing');
   };
 
-  if (status === 'editing') {
+  if (status === 'editing-personal') {
     return (
-      <PersonalDetailsForm
+      <EditPersonalDetailsForm
         data={resumeData}
         onSubmit={handleSubmit}
         onCancel={handleCancel}

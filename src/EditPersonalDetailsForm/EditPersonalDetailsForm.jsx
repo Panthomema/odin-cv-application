@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import FormField from '../FormField/FormField';
 import Form from '../Form/Form';
+import FormField from '../FormField/FormField';
 
-export default function PersonalForm({ data, onSubmit, onCancel }) {
+export default function EditPersonalDetailsForm({ data, onSubmit, onCancel }) {
   const [errors, setErrors] = useState({});
 
   const validationErrorMessages = {
