@@ -1,10 +1,21 @@
 .card {
   background-color: var(--color-ui);
-  border-radius: 5px;
   padding: 1.5em;
   box-shadow:
     0 0.1em 0.3em rgb(0 0 0 / 4%),
     0 0.05em 0.2em rgb(0 0 0 / 3%);
+}
+
+.borderRadius {
+  border-radius: var(--border-radius-card);
+}
+
+.borderRadiusTop {
+  border-radius: var(--border-radius-card) var(--border-radius-card) 0 0;
+}
+
+.borderRadiusBottom {
+  border-radius: 0 0 var(--border-radius-card) var(--border-radius-card);
 }
 
 .textSecondary {

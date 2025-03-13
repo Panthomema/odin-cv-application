@@ -5,7 +5,7 @@ import clsx from 'clsx';
 export default function Form({ title, children, onSubmit, onCancel }) {
   return (
     <form
-      className={clsx(utils.card, styles.form)}
+      className={clsx(utils.card, utils.borderRadius, styles.form)}
       onSubmit={onSubmit}
       noValidate
     >

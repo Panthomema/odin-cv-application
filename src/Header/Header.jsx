@@ -4,7 +4,7 @@ import styles from './Header.module.css';
 
 export default function Header() {
   return (
-    <header className={clsx(utils.card, styles.header)}>
+    <header className={clsx(utils.card, utils.borderRadius, styles.header)}>
       <h1>Easy CV</h1>
     </header>
   );
