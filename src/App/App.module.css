@@ -34,10 +34,11 @@
   }
 
   .column {
-    overflow: visible auto;
+    overflow-y: auto;
     min-height: 0;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    padding: 0 2px;
   }
 
   .column::-webkit-scrollbar {
