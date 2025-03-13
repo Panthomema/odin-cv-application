@@ -34,7 +34,7 @@
   }
 
   .column {
-    overflow-y: auto;
+    overflow: visible auto;
     min-height: 0;
     -ms-overflow-style: none;
     scrollbar-width: none;

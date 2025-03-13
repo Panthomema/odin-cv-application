@@ -42,6 +42,10 @@
     block-size: auto;
   }
 
+  :focus {
+    outline: none;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -90,6 +94,6 @@ button {
   cursor: pointer;
 }
 
-:focus {
+:focus-visible {
   outline: 2px solid var(--color-accent);
 }

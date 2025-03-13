@@ -31,7 +31,7 @@ export default function FormManager({ resumeData, onFormSubmit }) {
 
   return (
     <nav className={styles.formManager}>
-      <div
+      <button
         className={`${utils.card} ${styles.personalData}`}
         onClick={handleClick}
       >
@@ -57,11 +57,11 @@ export default function FormManager({ resumeData, onFormSubmit }) {
             value={resumeData.location}
           />
         </ul>
-      </div>
+      </button>
+      <Widget title="Work Experience" icon="work" />
     </nav>
   );
 }
-
 
 function PersonalDataListItem({ label, iconName, value }) {
   return value != '' ? (
@@ -74,5 +74,28 @@ function PersonalDataListItem({ label, iconName, value }) {
       <span className="material-symbols-outlined">{iconName}</span>
       {label}
     </li>
+  );
+}
+
+function Widget({ title, icon }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div className={styles.widget}>
+      <button
+        className={`${utils.card} ${styles.widgetHeader}`}
+        onClick={handleClick}
+      >
+        <h2 className={styles.widgetTitle}>
+          <span className="material-symbols-outlined">{icon}</span>
+          {title}
+        </h2>
+        <span className="material-symbols-outlined">arrow_drop_down</span>
+      </button>
+    </div>
   );
 }
