@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useState } from 'react';
-import PersonalForm from '../PersonalForm/PersonalForm';
+import PersonalDetailsForm from '../PersonalDetailsForm/PersonalDetailsForm';
 import utils from '../styles/Utils.module.css';
 import styles from './FormManager.module.css';
 
@@ -22,7 +22,7 @@ export default function FormManager({ resumeData, onFormSubmit }) {
 
   if (status === 'editing') {
     return (
-      <PersonalForm
+      <PersonalDetailsForm
         data={resumeData}
         onSubmit={handleSubmit}
         onCancel={handleCancel}
