@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PersonalForm from '../PersonalForm/PersonalForm';
 import utils from '../styles/Utils.module.css';
 import styles from './FormManager.module.css';
+import clsx from 'clsx';
 
 export default function FormManager({ resumeData, onFormSubmit }) {
   const [status, setStatus] = useState('viewing');
@@ -32,7 +33,7 @@ export default function FormManager({ resumeData, onFormSubmit }) {
   return (
     <nav className={styles.formManager}>
       <button
-        className={`${utils.card} ${styles.personalData}`}
+        className={clsx(utils.card, styles.personalData)}
         onClick={handleClick}
       >
         {resumeData.fullName != '' ? (
@@ -87,7 +88,7 @@ function Widget({ title, icon }) {
   return (
     <div className={styles.widget}>
       <button
-        className={`${utils.card} ${styles.widgetHeader}`}
+        className={clsx(utils.card, styles.widgetHeader)}
         onClick={handleClick}
       >
         <h2 className={styles.widgetTitle}>
@@ -96,7 +97,7 @@ function Widget({ title, icon }) {
         </h2>
         <span className="material-symbols-outlined">arrow_drop_down</span>
       </button>
-      {isOpen && <div className={`${utils.card} ${styles.widgetAdd}`}><button><span className="material-symbols-outlined">add</span> {title}</button></div>}
+      {isOpen && <div className={clsx(utils.card, styles.widgetAdd)}><button><span className="material-symbols-outlined">add</span> {title}</button></div>}
     </div>
   );
 }

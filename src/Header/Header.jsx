@@ -1,9 +1,10 @@
+import clsx from 'clsx';
+import utils from '../styles/Utils.module.css';
 import styles from './Header.module.css';
-import { card } from '../styles/Utils.module.css'
 
 export default function Header() {
   return (
-    <header className={`${card} ${styles.header}`}>
+    <header className={clsx(utils.card, styles.header)}>
       <h1>Easy CV</h1>
     </header>
   );

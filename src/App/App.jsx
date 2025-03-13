@@ -3,6 +3,7 @@ import styles from './App.module.css';
 import FormManager from '../FormManager/FormManager';
 import Header from '../Header/Header';
 import Preview from '../Preview/Preview';
+import clsx from 'clsx';
 
 export default function App() {
   const dataBlueprint = {
@@ -16,7 +17,7 @@ export default function App() {
 
   return (
     <div className={styles.app}>
-      <div className={`${styles.column} ${styles.controlsWrapper}`}>
+      <div className={clsx(styles.column, styles.controlsWrapper)}>
         <div className={styles.headerWrapper}>
           <Header />
         </div>
@@ -24,7 +25,7 @@ export default function App() {
           <FormManager resumeData={resumeData} onFormSubmit={setResumeData} />
         </div>
       </div>
-      <div className={`${styles.column} ${styles.previewWrapper}`}>
+      <div className={clsx(styles.column, styles.previewWrapper)}>
         <Preview resumeData={resumeData} />
       </div>
     </div>

@@ -1,10 +1,11 @@
 import utils from '../styles/Utils.module.css';
 import styles from './Form.module.css';
+import clsx from 'clsx';
 
 export default function Form({ title, children, onSubmit, onCancel }) {
   return (
     <form
-      className={`${utils.card} ${styles.form}`}
+      className={clsx(utils.card, styles.form)}
       onSubmit={onSubmit}
       noValidate
     >
@@ -13,14 +14,14 @@ export default function Form({ title, children, onSubmit, onCancel }) {
       <div className={styles.buttonsArea}>
         <button
           type="button"
-          className={`${styles.button} ${styles.buttonSecondary}`}
+          className={clsx(styles.button, styles.buttonSecondary)}
           onClick={onCancel}
         >
           Cancel
         </button>
         <button
           type="submit"
-          className={`${styles.button} ${styles.buttonPrimary}`}
+          className={clsx(styles.button, styles.buttonPrimary)}
         >
           Save
         </button>
