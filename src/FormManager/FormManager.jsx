@@ -96,6 +96,7 @@ function Widget({ title, icon }) {
         </h2>
         <span className="material-symbols-outlined">arrow_drop_down</span>
       </button>
+      {isOpen && <div className={`${utils.card} ${styles.widgetAdd}`}><button><span className="material-symbols-outlined">add</span> {title}</button></div>}
     </div>
   );
 }

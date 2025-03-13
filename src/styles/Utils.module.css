@@ -17,3 +17,7 @@
   height: 1em;
   color: var(--color-error);
 }
+
+.rotated180 {
+  transform: rotate(180deg);
+}
