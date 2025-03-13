@@ -1,15 +1,12 @@
 import clsx from 'clsx';
 import { useState } from 'react';
+import CreateWorkExperienceForm from '../CreateWorkExperienceForm/CreateWorkExperienceForm';
 import EditPersonalDetailsForm from '../EditPersonalDetailsForm/EditPersonalDetailsForm';
 import utils from '../styles/Utils.module.css';
 import styles from './FormManager.module.css';
 
 export default function FormManager({ resumeData, onFormSubmit }) {
   const [status, setStatus] = useState('viewing');
-
-  const handleClick = () => {
-    setStatus('editing-personal');
-  };
 
   const handleCancel = () => {
     setStatus('viewing');
@@ -30,11 +27,21 @@ export default function FormManager({ resumeData, onFormSubmit }) {
     );
   }
 
+  if (status === 'creating-experience') {
+    return (
+      <CreateWorkExperienceForm
+        data={resumeData}
+        onSubmit={handleSubmit}
+        onCancel={handleCancel}
+      />
+    );
+  }
+
   return (
     <nav className={styles.formManager}>
       <button
         className={clsx(utils.card, utils.borderRadius, styles.personalData)}
-        onClick={handleClick}
+        onClick={() => setStatus('editing-personal')}
       >
         {resumeData.fullName != '' ? (
           <h2>{resumeData.fullName}</h2>
@@ -59,7 +66,11 @@ export default function FormManager({ resumeData, onFormSubmit }) {
           />
         </ul>
       </button>
-      <Widget title="Work Experience" icon="work" />
+      <Widget
+        title="Work Experience"
+        icon="work"
+        onAddClick={() => setStatus('creating-experience')}
+      />
     </nav>
   );
 }
@@ -78,7 +89,7 @@ function PersonalDataListItem({ label, iconName, value }) {
   );
 }
 
-function Widget({ title, icon }) {
+function Widget({ title, icon, onAddClick }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
@@ -116,7 +127,7 @@ function Widget({ title, icon }) {
             styles.widgetAdd,
           )}
         >
-          <button>
+          <button onClick={onAddClick}>
             <span className="material-symbols-outlined">add</span> {title}
           </button>
         </div>
