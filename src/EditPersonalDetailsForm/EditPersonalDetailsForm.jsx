@@ -53,9 +53,6 @@ export default function EditPersonalDetailsForm({ data, onSubmit, onCancel }) {
     e.preventDefault();
     const form = e.target;
 
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-
     const newErrors = {};
     Array.from(form.elements).forEach((field) => {
       if (field.tagName === 'INPUT' && !field.checkValidity()) {
@@ -70,7 +67,13 @@ export default function EditPersonalDetailsForm({ data, onSubmit, onCancel }) {
       return;
     }
 
-    onSubmit(data);
+    const formData = new FormData(form);
+    const newPersonalDetails = Object.fromEntries(formData.entries());
+
+    onSubmit((prevData) => ({
+      personalDetails: newPersonalDetails,
+      ...prevData,
+    }));
   };
 
   return (

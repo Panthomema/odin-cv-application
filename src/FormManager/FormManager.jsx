@@ -7,6 +7,7 @@ import styles from './FormManager.module.css';
 
 export default function FormManager({ resumeData, onFormSubmit }) {
   const [status, setStatus] = useState('viewing');
+  const { personalDetails } = resumeData;
 
   const handleCancel = () => {
     setStatus('viewing');
@@ -20,7 +21,7 @@ export default function FormManager({ resumeData, onFormSubmit }) {
   if (status === 'editing-personal') {
     return (
       <EditPersonalDetailsForm
-        data={resumeData}
+        data={personalDetails}
         onSubmit={handleSubmit}
         onCancel={handleCancel}
       />
@@ -43,8 +44,8 @@ export default function FormManager({ resumeData, onFormSubmit }) {
         className={clsx(utils.card, utils.borderRadius, styles.personalData)}
         onClick={() => setStatus('editing-personal')}
       >
-        {resumeData.fullName != '' ? (
-          <h2>{resumeData.fullName}</h2>
+        {personalDetails.fullName != '' ? (
+          <h2>{personalDetails.fullName}</h2>
         ) : (
           <h2 className={styles.placeholderText}>Your name</h2>
         )}
@@ -52,17 +53,17 @@ export default function FormManager({ resumeData, onFormSubmit }) {
           <PersonalDataListItem
             label="Email"
             iconName="email"
-            value={resumeData.email}
+            value={personalDetails.email}
           />
           <PersonalDataListItem
             label="Phone Number"
             iconName="phone"
-            value={resumeData.phoneNumber}
+            value={personalDetails.phoneNumber}
           />
           <PersonalDataListItem
             label="Location"
             iconName="location_on"
-            value={resumeData.location}
+            value={personalDetails.location}
           />
         </ul>
       </button>
