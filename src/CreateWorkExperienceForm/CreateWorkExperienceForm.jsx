@@ -6,21 +6,10 @@ export default function CreateWorkExperienceForm({ data, onSubmit, onCancel }) {
   const [errors, setErrors] = useState({});
 
   const validationErrorMessages = {
-    fullName: {
-      valueMissing: 'Full name is required.',
-      tooShort: 'Full name must be at least 2 characters.',
-      tooLong: 'Full name cannot exceed 40 characters.',
-    },
-    email: {
-      typeMismatch: 'Please enter a valid email address.',
-      tooLong: 'Email cannot exceed 320 characters.',
-    },
-    phoneNumber: {
-      patternMismatch: 'Please provide a valid phone number.',
-    },
-    location: {
-      tooShort: 'Location must be at least 2 characters.',
-      tooLong: 'Location cannot exceed 100 characters.',
+    companyName: {
+      valueMissing: 'Company name is required.',
+      tooShort: 'Company name must be at least 2 characters.',
+      tooLong: 'Company name cannot exceed 40 characters.',
     },
   };
 
