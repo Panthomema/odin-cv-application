@@ -1,5 +1,6 @@
 import utils from '../styles/Utils.module.css';
 import styles from './FormField.module.css';
+import clsx from 'clsx';
 
 export default function FormField({
   name,
@@ -20,7 +21,7 @@ export default function FormField({
         type={type}
         name={name}
         id={name}
-        className={styles.input}
+        className={clsx(styles.input, error && styles.invalid)}
         defaultValue={value}
         onBlur={onBlur}
         {...constraints}
