@@ -2,7 +2,11 @@ import { useState } from 'react';
 import Form from '../Form/Form';
 import FormField from '../FormField/FormField';
 
-export default function CreateWorkExperienceForm({ data, onSubmit, onCancel }) {
+export default function CreateWorkExperienceForm({
+  data,
+  onValidData,
+  onCancel,
+}) {
   const [errors, setErrors] = useState({});
 
   const validationErrorMessages = {
@@ -42,9 +46,6 @@ export default function CreateWorkExperienceForm({ data, onSubmit, onCancel }) {
     e.preventDefault();
     const form = e.target;
 
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-
     const newErrors = {};
     Array.from(form.elements).forEach((field) => {
       if (field.tagName === 'INPUT' && !field.checkValidity()) {
@@ -59,7 +60,17 @@ export default function CreateWorkExperienceForm({ data, onSubmit, onCancel }) {
       return;
     }
 
-    onSubmit(data);
+    const formData = new FormData(form);
+    const newWorkExperience = Object.fromEntries(formData.entries());
+    console.log(newWorkExperience);
+
+    onValidData((prevData) => ({
+      ...prevData,
+      workExperience: [
+        ...(prevData.workExperience ?? []),
+        { id: crypto.randomUUID(), ...newWorkExperience },
+      ],
+    }));
   };
 
   return (

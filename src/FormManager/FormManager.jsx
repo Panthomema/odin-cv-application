@@ -9,11 +9,13 @@ export default function FormManager({ resumeData, onFormSubmit }) {
   const [status, setStatus] = useState('viewing');
   const { personalDetails } = resumeData;
 
+  console.log(resumeData);
+
   const handleCancel = () => {
     setStatus('viewing');
   };
 
-  const handleSubmit = (data) => {
+  const handleValidData = (data) => {
     onFormSubmit(data);
     setStatus('viewing');
   };
@@ -22,7 +24,7 @@ export default function FormManager({ resumeData, onFormSubmit }) {
     return (
       <EditPersonalDetailsForm
         data={personalDetails}
-        onSubmit={handleSubmit}
+        onValidData={handleValidData}
         onCancel={handleCancel}
       />
     );
@@ -32,7 +34,7 @@ export default function FormManager({ resumeData, onFormSubmit }) {
     return (
       <CreateWorkExperienceForm
         data={resumeData}
-        onSubmit={handleSubmit}
+        onValidData={handleValidData}
         onCancel={handleCancel}
       />
     );
