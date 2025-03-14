@@ -7,10 +7,13 @@ import clsx from 'clsx';
 
 export default function App() {
   const dataBlueprint = {
-    fullName: 'Jonander García Fernández',
-    email: 'ion_and_er@kerejeta.eus',
-    phoneNumber: '+35678290393',
-    location: 'Infrarreformatorio, Euskadi',
+    personalDetails: {
+      fullName: 'Jonander García Fernández',
+      email: 'ion_and_er@kerejeta.eus',
+      phoneNumber: '+35678290393',
+      location: 'Infrarreformatorio, Euskadi',
+    },
+    workExperience: [],
   };
 
   const [resumeData, setResumeData] = useState(dataBlueprint);
