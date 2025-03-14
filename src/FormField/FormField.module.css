@@ -11,6 +11,12 @@
   padding: 0.4em 0.6em;
 }
 
-.input.invalid:not(:focus) {
+.textarea {
+  min-height: 8em; 
+  resize: vertical;
+}
+
+.input.invalid:not(:focus),
+.textarea.invalid:not(:focus) {
   outline: 2px solid var(--color-error);
 }

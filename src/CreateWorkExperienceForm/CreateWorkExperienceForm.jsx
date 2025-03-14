@@ -114,6 +114,15 @@ export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
           error={errors.endDate}
         />
       </div>
+      <FormField
+        name="description"
+        type="textarea"
+        label="Description"
+        tag="recommended"
+        onBlur={handleBlur}
+        constraints={{}}
+        error={errors.description}
+      />
     </Form>
   );
 }
