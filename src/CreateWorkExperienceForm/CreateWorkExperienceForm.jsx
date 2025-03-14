@@ -1,12 +1,9 @@
 import { useState } from 'react';
 import Form from '../Form/Form';
 import FormField from '../FormField/FormField';
+import styles from './CreateWorkExperienceForm.module.css';
 
-export default function CreateWorkExperienceForm({
-  data,
-  onValidData,
-  onCancel,
-}) {
+export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
   const [errors, setErrors] = useState({});
 
   const validationErrorMessages = {
@@ -84,7 +81,6 @@ export default function CreateWorkExperienceForm({
         type="text"
         label="Company Name"
         tag="required"
-        value={data?.companyName}
         onBlur={handleBlur}
         constraints={{ required: true, minLength: 2, maxLength: 40 }}
         error={errors.companyName}
@@ -94,11 +90,30 @@ export default function CreateWorkExperienceForm({
         type="text"
         label="Position"
         tag="recommended"
-        value={data?.position}
         onBlur={handleBlur}
         constraints={{}}
         error={errors.position}
       />
+      <div className={styles.inlineFields}>
+        <FormField
+          name="startDate"
+          type="month"
+          label="Start Date"
+          tag="optional"
+          onBlur={handleBlur}
+          constraints={{}}
+          error={errors.startDate}
+        />
+        <FormField
+          name="endDate"
+          type="month"
+          label="End Date"
+          tag="optional"
+          onBlur={handleBlur}
+          constraints={{}}
+          error={errors.endDate}
+        />
+      </div>
     </Form>
   );
 }

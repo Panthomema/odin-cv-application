@@ -33,7 +33,6 @@ export default function FormManager({ resumeData, onFormSubmit }) {
   if (status === 'creating-experience') {
     return (
       <CreateWorkExperienceForm
-        data={resumeData}
         onValidData={handleValidData}
         onCancel={handleCancel}
       />
