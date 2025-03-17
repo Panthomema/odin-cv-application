@@ -37,14 +37,14 @@ export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
     },
     startDate: {
       rangeUnderflow: `Start date must be greater than ${minDateText}.`,
-      rangeOverflow: `Start date must be earlier than ${maxDateText}.`,
+      rangeOverflow: `Start date must be lower than ${maxDateText}.`,
       badInput: 'Start date requires month and year.',
       valueMissing: 'Start date is required if end date is provided.',
       greaterThanEnd: "Start date can't be greater than end date.",
     },
     endDate: {
       rangeUnderflow: `End date must be greater than ${minDateText}.`,
-      rangeOverflow: `End date must be earlier than ${maxDateText}.`,
+      rangeOverflow: `End date must be lower than ${maxDateText}.`,
       badInput: 'End date requires month and year.',
       lowerThanStart: "End date can't be lower than start date.",
     },
@@ -78,10 +78,6 @@ export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
   const handleDateBlur = () => {
     const startDateField = startDateRef.current;
     const endDateField = endDateRef.current;
-
-    if (startDateField.value) {
-      endDateField.min = startDateField.value;
-    }
 
     let startDateErrorMessage = null;
     let endDateErrorMessage = null;
