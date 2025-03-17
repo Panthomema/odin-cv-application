@@ -11,6 +11,7 @@ export default function FormField({
   onBlur,
   constraints = {},
   error,
+  ref,
 }) {
   return (
     <div className={styles.formField}>
@@ -32,6 +33,7 @@ export default function FormField({
         ></textarea>
       ) : (
         <input
+          ref={ref}
           type={type}
           name={name}
           id={name}

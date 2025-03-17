@@ -1,10 +1,29 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Form from '../Form/Form';
 import FormField from '../FormField/FormField';
 import styles from './CreateWorkExperienceForm.module.css';
 
 export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
   const [errors, setErrors] = useState({});
+  const startDateRef = useRef(null);
+  const endDateRef = useRef(null);
+
+  const formatDateYearMonth = (date) =>
+    `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, 0)}`;
+
+  const formatDateYearMonthText = (date) =>
+    new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(
+      date,
+    );
+
+  const today = new Date();
+  const fiftyYearsAgo = new Date();
+  fiftyYearsAgo.setFullYear(fiftyYearsAgo.getFullYear() - 50);
+
+  const maxDate = formatDateYearMonth(today);
+  const maxDateText = formatDateYearMonthText(today);
+  const minDate = formatDateYearMonth(fiftyYearsAgo);
+  const minDateText = formatDateYearMonthText(fiftyYearsAgo);
 
   const validationErrorMessages = {
     companyName: {
@@ -14,18 +33,18 @@ export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
     },
     position: {
       tooShort: 'Position must be at least 2 characters.',
-      tooLong: 'Position cannot exceed 40 characters.',
+      tooLong: 'Position cannot exceed 50 characters.',
     },
     startDate: {
-      min: 'Start date must be greater than December 1960.',
-      max: 'Start date must be earlier than next month.',
+      rangeUnderflow: `Start date must be greater than ${minDateText}.`,
+      rangeOverflow: `Start date must be earlier than ${maxDateText}.`,
       badInput: 'Start date requires month and year.',
       valueMissing: 'Start date is required if end date is provided.',
       greaterThanEnd: "Start date can't be greater than end date.",
     },
     endDate: {
-      min: 'End date must be greater than December 1960.',
-      max: 'End date must be earlier than next month.',
+      rangeUnderflow: `End date must be greater than ${minDateText}.`,
+      rangeOverflow: `End date must be earlier than ${maxDateText}.`,
       badInput: 'End date requires month and year.',
       lowerThanStart: "End date can't be lower than start date.",
     },
@@ -42,12 +61,9 @@ export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
     return null;
   };
 
-  const formatDate = (date) =>
-    `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, 0)}`;
-
   const handleBlur = (e) => {
     const field = e.target;
-    if (field.tagName !== 'INPUT') return;
+    if (field.tagName !== 'INPUT' || field.tagName === 'TEXTAREA') return;
 
     const errorMessage = !field.checkValidity()
       ? (getErrorMessage(field) ?? field.validationMessage)
@@ -59,21 +75,54 @@ export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
     }));
   };
 
+  const handleDateBlur = () => {
+    const startDateField = startDateRef.current;
+    const endDateField = endDateRef.current;
+
+    if (startDateField.value) {
+      endDateField.min = startDateField.value;
+    }
+
+    let startDateErrorMessage = null;
+    let endDateErrorMessage = null;
+
+    if (endDateField.value && !startDateField.value) {
+      startDateErrorMessage = validationErrorMessages.startDate.valueMissing;
+    }
+
+    if (
+      startDateField.value &&
+      endDateField.value &&
+      new Date(startDateField.value) > new Date(endDateField.value)
+    ) {
+      startDateErrorMessage = validationErrorMessages.startDate.greaterThanEnd;
+      endDateErrorMessage = validationErrorMessages.endDate.lowerThanStart;
+    }
+
+    if (!startDateField.checkValidity()) {
+      startDateErrorMessage =
+        getErrorMessage(startDateField) ?? startDateField.validationMessage;
+    }
+
+    if (!endDateField.checkValidity()) {
+      endDateErrorMessage =
+        getErrorMessage(endDateField) ?? endDateField.validationMessage;
+    }
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      startDate: startDateErrorMessage ?? prevErrors.startDate,
+      endDate: endDateErrorMessage ?? prevErrors.endDate,
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
+    const startDateField = startDateRef.current;
+    const endDateField = endDateRef.current;
 
     const newErrors = {};
-    const startDateField = form.elements.startDate;
-    const endDateField = form.elements.endDate;
-
-    Array.from(form.elements).forEach((field) => {
-      if (field.tagName === 'INPUT' && !field.checkValidity()) {
-        console.log(field.validity);
-        newErrors[field.name] =
-          getErrorMessage(field) ?? field.validationMessage;
-      }
-    });
 
     if (endDateField.value && !startDateField.value) {
       newErrors.startDate = validationErrorMessages.startDate.valueMissing;
@@ -88,6 +137,17 @@ export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
       newErrors.endDate = validationErrorMessages.endDate.lowerThanStart;
     }
 
+    Array.from(form.elements).forEach((field) => {
+      if (
+        (field.tagName === 'INPUT' || field.tagName === 'TEXTAREA') &&
+        !field.checkValidity()
+      ) {
+        console.log(field.validity);
+        newErrors[field.name] =
+          getErrorMessage(field) ?? field.validationMessage;
+      }
+    });
+
     if (Object.keys(newErrors).length > 0) {
       console.log(newErrors);
       setErrors(newErrors);
@@ -97,8 +157,6 @@ export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
     const formData = new FormData(form);
     const newWorkExperience = Object.fromEntries(formData.entries());
     console.log(newWorkExperience);
-
-    return; // for debugging
 
     onValidData((prevData) => ({
       ...prevData,
@@ -135,21 +193,23 @@ export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
       />
       <div className={styles.inlineFields}>
         <FormField
+          ref={startDateRef}
           name="startDate"
           type="month"
           label="Start Date"
           tag="optional"
-          onBlur={handleBlur}
-          constraints={{ min: '1960-01', max: formatDate(new Date()) }}
+          onBlur={handleDateBlur}
+          constraints={{ min: minDate, max: maxDate }}
           error={errors.startDate}
         />
         <FormField
+          ref={endDateRef}
           name="endDate"
           type="month"
           label="End Date"
           tag="optional"
-          onBlur={handleBlur}
-          constraints={{ min: '1900-01', max: formatDate(new Date()) }}
+          onBlur={handleDateBlur}
+          constraints={{ min: minDate, max: maxDate }}
           error={errors.endDate}
         />
       </div>
