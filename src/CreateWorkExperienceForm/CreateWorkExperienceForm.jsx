@@ -12,6 +12,23 @@ export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
       tooShort: 'Company name must be at least 2 characters.',
       tooLong: 'Company name cannot exceed 40 characters.',
     },
+    position: {
+      tooShort: 'Position must be at least 2 characters.',
+      tooLong: 'Position cannot exceed 40 characters.',
+    },
+    startDate: {
+      min: 'Start date must be greater than December 1960.',
+      max: 'Start date must be earlier than next month.',
+      badInput: 'Start date requires month and year.',
+      valueMissing: 'Start date is required if end date is provided.',
+      greaterThanEnd: "Start date can't be greater than end date.",
+    },
+    endDate: {
+      min: 'End date must be greater than December 1960.',
+      max: 'End date must be earlier than next month.',
+      badInput: 'End date requires month and year.',
+      lowerThanStart: "End date can't be lower than start date.",
+    },
   };
 
   const getErrorMessage = (field) => {
@@ -24,6 +41,9 @@ export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
 
     return null;
   };
+
+  const formatDate = (date) =>
+    `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, 0)}`;
 
   const handleBlur = (e) => {
     const field = e.target;
@@ -44,12 +64,29 @@ export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
     const form = e.target;
 
     const newErrors = {};
+    const startDateField = form.elements.startDate;
+    const endDateField = form.elements.endDate;
+
     Array.from(form.elements).forEach((field) => {
       if (field.tagName === 'INPUT' && !field.checkValidity()) {
+        console.log(field.validity);
         newErrors[field.name] =
           getErrorMessage(field) ?? field.validationMessage;
       }
     });
+
+    if (endDateField.value && !startDateField.value) {
+      newErrors.startDate = validationErrorMessages.startDate.valueMissing;
+    }
+
+    if (
+      startDateField.value &&
+      endDateField.value &&
+      new Date(startDateField.value) > new Date(endDateField.value)
+    ) {
+      newErrors.startDate = validationErrorMessages.startDate.greaterThanEnd;
+      newErrors.endDate = validationErrorMessages.endDate.lowerThanStart;
+    }
 
     if (Object.keys(newErrors).length > 0) {
       console.log(newErrors);
@@ -60,6 +97,8 @@ export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
     const formData = new FormData(form);
     const newWorkExperience = Object.fromEntries(formData.entries());
     console.log(newWorkExperience);
+
+    return; // for debugging
 
     onValidData((prevData) => ({
       ...prevData,
@@ -91,7 +130,7 @@ export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
         label="Position"
         tag="recommended"
         onBlur={handleBlur}
-        constraints={{}}
+        constraints={{ minLength: 2, maxLength: 50 }}
         error={errors.position}
       />
       <div className={styles.inlineFields}>
@@ -101,7 +140,7 @@ export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
           label="Start Date"
           tag="optional"
           onBlur={handleBlur}
-          constraints={{}}
+          constraints={{ min: '1960-01', max: formatDate(new Date()) }}
           error={errors.startDate}
         />
         <FormField
@@ -110,7 +149,7 @@ export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
           label="End Date"
           tag="optional"
           onBlur={handleBlur}
-          constraints={{}}
+          constraints={{ min: '1900-01', max: formatDate(new Date()) }}
           error={errors.endDate}
         />
       </div>
