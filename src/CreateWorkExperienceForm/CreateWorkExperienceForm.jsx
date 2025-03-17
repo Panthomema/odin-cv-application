@@ -48,6 +48,10 @@ export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
       badInput: 'End date requires month and year.',
       lowerThanStart: "End date can't be lower than start date.",
     },
+    description: {
+      tooShort: 'Description must be at least 10 characters.',
+      tooLong: 'Description cannot exceed 500 characters.',
+    },
   };
 
   const getErrorMessage = (field) => {
@@ -63,7 +67,7 @@ export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
 
   const handleBlur = (e) => {
     const field = e.target;
-    if (field.tagName !== 'INPUT' || field.tagName === 'TEXTAREA') return;
+    if (field.tagName !== 'INPUT' && field.tagName !== 'TEXTAREA') return;
 
     const errorMessage = !field.checkValidity()
       ? (getErrorMessage(field) ?? field.validationMessage)
@@ -215,7 +219,7 @@ export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
         label="Description"
         tag="recommended"
         onBlur={handleBlur}
-        constraints={{}}
+        constraints={{ minLength: 20, maxLength: 500 }}
         error={errors.description}
       />
     </Form>
