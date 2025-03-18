@@ -37,14 +37,18 @@
 }
 
 .widget {
+  color: var(--color-text);
   display: flex;
   flex-direction: column;
   gap: 0.4em;
 }
 
+.widget button {
+  color: inherit;
+}
+
 .widgetHeader {
   text-align: left;
-  color: var(--color-text);
   display: flex;
   align-items: center;
   justify-content: space-between;
