@@ -141,7 +141,7 @@ function Widget({ title, icon, onAddClick, items }) {
             )}
           >
             <button onClick={onAddClick}>
-              <span className="material-symbols-outlined">add</span> {title}
+              <span className="material-symbols-outlined">add</span> Add New
             </button>
           </div>
         </>
