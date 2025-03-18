@@ -63,15 +63,19 @@
 
 .sectionItem {
   display: flex;
-  gap: 2em;
-}
-
-.sectionItem div {
-  display: flex;
   flex-direction: column;
-  gap: 0.5em;
+  gap: 1.5em;
 }
 
-.sectionItem div:first-child {
-  min-width: max-content;
+.sectionItem > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.itemHeader div:nth-child(2) {
+  text-align: right;
+}
+
+.itemDate {
+  color: var(--color-accent);
 }

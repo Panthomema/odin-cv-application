@@ -75,28 +75,30 @@ export default function Preview({ resumeData }) {
               <h2 className={styles.sectionTitle}>Professional Experience</h2>
               {professionalExperience.map((item) => (
                 <div key={item.id} className={styles.sectionItem}>
-                  <div>
-                    {item.startDate && (
+                  <div className={styles.itemHeader}>
+                    <div>
                       <p>
-                        {format(new Date(item.startDate), 'MMMM yyyy')} -{' '}
-                        {item.endDate !== ''
-                          ? format(new Date(item.startDate), 'MMMM yyyy')
-                          : 'Present'}
+                        <strong>{item.companyName}</strong>
                       </p>
-                    )}
-                    {item.location && <p>{item.location}</p>}
+                      {item.position && (
+                        <p>
+                          <em>{item.position}</em>
+                        </p>
+                      )}
+                    </div>
+                    <div>
+                      {item.startDate && (
+                        <p className={styles.itemDate}>
+                          {format(new Date(item.startDate), 'MMMM yyyy')} -{' '}
+                          {item.endDate !== ''
+                            ? format(new Date(item.endDate), 'MMMM yyyy')
+                            : 'Present'}
+                        </p>
+                      )}
+                      {item.location && <p>{item.location}</p>}
+                    </div>
                   </div>
-                  <div>
-                    <p>
-                      <strong>{item.companyName}</strong>
-                    </p>
-                    {item.position && (
-                      <p>
-                        <em>{item.position}</em>
-                      </p>
-                    )}
-                    {item.description && <p>{item.description}</p>}
-                  </div>
+                  {item.description && <p>{item.description}</p>}
                 </div>
               ))}
             </div>
