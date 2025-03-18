@@ -18,8 +18,8 @@ export default function App() {
         companyName: 'PixelCraft Web Solutions',
         position: 'Frontend Developer',
         location: 'Madrid, Spain',
-        startDate: '2022-03',
-        endDate: '2023-12',
+        startDate: '2024-06',
+        endDate: '',
         description:
           `Developed responsive and accessible web interfaces using React and Tailwind CSS.
           Optimized website performance, reducing load times by 30% through efficient asset management.
@@ -31,7 +31,7 @@ export default function App() {
         position: 'Web Developer',
         location: 'Barcelona, Spain',
         startDate: '2021-01',
-        endDate: '2022-02',
+        endDate: '2024-02',
         description:
           'Built and maintained client websites using JavaScript, HTML, and CSS. ' +
           'Implemented SEO best practices, improving search rankings for multiple projects. ' +

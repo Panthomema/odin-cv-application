@@ -158,13 +158,6 @@ export default function CreateProfessionalExperienceForm({
     const newProfessionalExperience = Object.fromEntries(formData.entries());
     console.log(newProfessionalExperience);
 
-    if (
-      newProfessionalExperience.startDate &&
-      !newProfessionalExperience.endDate
-    ) {
-      newProfessionalExperience.endDate = 'Present';
-    }
-
     onValidData((prevData) => ({
       ...prevData,
       professionalExperience: [
