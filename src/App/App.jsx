@@ -33,10 +33,10 @@ export default function App() {
         startDate: '2021-01',
         endDate: '2024-02',
         description:
-          'Built and maintained client websites using JavaScript, HTML, and CSS. ' +
-          'Implemented SEO best practices, improving search rankings for multiple projects. ' +
-          'Created reusable components and templates to streamline development. ' +
-          'Provided technical support and debugging for website issues.',
+          `Built and maintained client websites using JavaScript, HTML, and CSS. 
+          Implemented SEO best practices, improving search rankings for multiple projects.  
+          Created reusable components and templates to streamline development.  
+          Provided technical support and debugging for website issues.`,
       },
     ],
   };

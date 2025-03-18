@@ -98,7 +98,16 @@ export default function Preview({ resumeData }) {
                       {item.location && <p>{item.location}</p>}
                     </div>
                   </div>
-                  {item.description && <p>{item.description}</p>}
+                  {item.description && (
+                    <p>
+                      {item.description.split('\n').map((line, index) => (
+                        <span key={index}>
+                          {line}
+                          <br />
+                        </span>
+                      ))}
+                    </p>
+                  )}
                 </div>
               ))}
             </div>
