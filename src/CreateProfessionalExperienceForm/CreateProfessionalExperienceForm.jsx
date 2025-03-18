@@ -1,6 +1,10 @@
 import { useRef, useState } from 'react';
 import Form from '../Form/Form';
 import FormField from '../FormField/FormField';
+import {
+  formatDateYearMonth,
+  formatDateYearMonthText,
+} from '../utils/functions';
 import styles from './CreateProfessionalExperienceForm.module.css';
 
 export default function CreateProfessionalExperienceForm({
@@ -10,14 +14,6 @@ export default function CreateProfessionalExperienceForm({
   const [errors, setErrors] = useState({});
   const startDateRef = useRef(null);
   const endDateRef = useRef(null);
-
-  const formatDateYearMonth = (date) =>
-    `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, 0)}`;
-
-  const formatDateYearMonthText = (date) =>
-    new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric' }).format(
-      date,
-    );
 
   const today = new Date();
   const fiftyYearsAgo = new Date();
