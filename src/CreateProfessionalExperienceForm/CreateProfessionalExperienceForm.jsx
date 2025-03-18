@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
 import Form from '../Form/Form';
 import FormField from '../FormField/FormField';
-import styles from './CreateWorkExperienceForm.module.css';
+import styles from './CreateProfessionalExperienceForm.module.css';
 
-export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
+export default function CreateProfessionalExperienceForm({ onValidData, onCancel }) {
   const [errors, setErrors] = useState({});
   const startDateRef = useRef(null);
   const endDateRef = useRef(null);
@@ -155,21 +155,21 @@ export default function CreateWorkExperienceForm({ onValidData, onCancel }) {
     }
 
     const formData = new FormData(form);
-    const newWorkExperience = Object.fromEntries(formData.entries());
-    console.log(newWorkExperience);
+    const newProfessionalExperience = Object.fromEntries(formData.entries());
+    console.log(newProfessionalExperience);
 
     onValidData((prevData) => ({
       ...prevData,
-      workExperience: [
-        ...(prevData.workExperience ?? []),
-        { id: crypto.randomUUID(), ...newWorkExperience },
+      professionalExperience: [
+        ...(prevData.professionalExperience ?? []),
+        { id: crypto.randomUUID(), ...newProfessionalExperience },
       ],
     }));
   };
 
   return (
     <Form
-      title="Create Work Experience"
+      title="Create Professional Experience"
       onSubmit={handleSubmit}
       onCancel={onCancel}
     >

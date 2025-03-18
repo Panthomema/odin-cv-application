@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 import { useState } from 'react';
-import CreateWorkExperienceForm from '../CreateWorkExperienceForm/CreateWorkExperienceForm';
+import CreateProfessionalExperienceForm from '../CreateProfessionalExperienceForm/CreateProfessionalExperienceForm';
 import EditPersonalDetailsForm from '../EditPersonalDetailsForm/EditPersonalDetailsForm';
 import utils from '../styles/Utils.module.css';
 import styles from './FormManager.module.css';
 
 export default function FormManager({ resumeData, onFormSubmit }) {
   const [status, setStatus] = useState('viewing');
-  const { personalDetails, workExperience } = resumeData;
+  const { personalDetails, professionalExperience } = resumeData;
 
   const handleCancel = () => {
     setStatus('viewing');
@@ -30,7 +30,7 @@ export default function FormManager({ resumeData, onFormSubmit }) {
 
   if (status === 'creating-experience') {
     return (
-      <CreateWorkExperienceForm
+      <CreateProfessionalExperienceForm
         onValidData={handleValidData}
         onCancel={handleCancel}
       />
@@ -67,10 +67,10 @@ export default function FormManager({ resumeData, onFormSubmit }) {
         </ul>
       </button>
       <Widget
-        title="Work Experience"
+        title="Professional Experience"
         icon="work"
         onAddClick={() => setStatus('creating-experience')}
-        items={workExperience}
+        items={professionalExperience}
       />
     </nav>
   );

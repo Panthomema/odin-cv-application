@@ -13,7 +13,7 @@ export default function App() {
       phoneNumber: '+35678290393',
       location: 'Infrarreformatorio, Euskadi',
     },
-    workExperience: [],
+    professionalExperience: [],
   };
 
   const [resumeData, setResumeData] = useState(dataBlueprint);

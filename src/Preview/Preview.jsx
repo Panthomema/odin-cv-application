@@ -7,7 +7,7 @@ const A4_HEIGHT = 1123;
 export default function Preview({ resumeData }) {
   const [scale, setScale] = useState(1);
   const containerRef = useRef(null);
-  const { personalDetails } = resumeData; 
+  const { personalDetails, professionalExperience } = resumeData; 
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -68,6 +68,8 @@ export default function Preview({ resumeData }) {
             )}
           </ul>
         </div>
+        {professionalExperience.length > 0 && <><h2>Professional Experience</h2>
+        </>}
       </div>
     </div>
   );
