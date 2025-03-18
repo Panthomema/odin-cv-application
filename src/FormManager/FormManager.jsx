@@ -5,7 +5,7 @@ import EditPersonalDetailsForm from '../EditPersonalDetailsForm/EditPersonalDeta
 import utils from '../styles/Utils.module.css';
 import styles from './FormManager.module.css';
 
-export default function FormManager({ resumeData, onFormSubmit }) {
+export default function FormManager({ resumeData, onDataModify }) {
   const [status, setStatus] = useState('viewing');
   const { personalDetails, professionalExperience } = resumeData;
 
@@ -14,7 +14,7 @@ export default function FormManager({ resumeData, onFormSubmit }) {
   };
 
   const handleValidData = (data) => {
-    onFormSubmit(data);
+    onDataModify(data);
     setStatus('viewing');
   };
 
@@ -70,6 +70,7 @@ export default function FormManager({ resumeData, onFormSubmit }) {
         title="Professional Experience"
         icon="work"
         onAddClick={() => setStatus('creating-experience')}
+        onVisibilityToggle={onDataModify}
         items={professionalExperience}
       />
     </nav>
@@ -90,14 +91,24 @@ function PersonalDataListItem({ label, iconName, value }) {
   );
 }
 
-function Widget({ title, icon, onAddClick, items }) {
+function Widget({ title, icon, onAddClick, onVisibilityToggle, items }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
 
-  console.log(items);
+  const handleToggleVisibility = (e, itemId) => {
+    e.stopPropagation();
+
+    onVisibilityToggle((prevData) => ({
+      ...prevData,
+      professionalExperience: prevData.professionalExperience.map((item) => ({
+        ...item,
+        visible: (item.id === itemId) ? !item.visible : item.visible,
+      })),
+    }));
+  };
 
   return (
     <div className={styles.widget}>
@@ -130,7 +141,12 @@ function Widget({ title, icon, onAddClick, items }) {
               className={clsx(utils.card, styles.widgetItem)}
             >
               {item.companyName}
-              <span className="material-symbols-outlined">visibility_off</span>
+              <span
+                className="material-symbols-outlined"
+                onClick={(e) => handleToggleVisibility(e, item.id)}
+              >
+                {item.visible ? 'visibility_off' : 'visibility'}
+              </span>
             </button>
           ))}
           <div

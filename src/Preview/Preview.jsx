@@ -70,46 +70,48 @@ export default function Preview({ resumeData }) {
           </ul>
         </div>
         <div className={styles.content}>
-          {professionalExperience.length > 0 && (
+          {professionalExperience.some(({ visible }) => visible) && (
             <div className={styles.section}>
               <h2 className={styles.sectionTitle}>Professional Experience</h2>
-              {professionalExperience.map((item) => (
-                <div key={item.id} className={styles.sectionItem}>
-                  <div className={styles.itemHeader}>
-                    <div>
-                      <p>
-                        <strong>{item.companyName}</strong>
-                      </p>
-                      {item.position && (
+              {professionalExperience
+                .filter(({ visible }) => visible)
+                .map((item) => (
+                  <div key={item.id} className={styles.sectionItem}>
+                    <div className={styles.itemHeader}>
+                      <div>
                         <p>
-                          <em>{item.position}</em>
+                          <strong>{item.companyName}</strong>
                         </p>
-                      )}
+                        {item.position && (
+                          <p>
+                            <em>{item.position}</em>
+                          </p>
+                        )}
+                      </div>
+                      <div>
+                        {item.startDate && (
+                          <p className={styles.itemDate}>
+                            {format(new Date(item.startDate), 'MMMM yyyy')} -{' '}
+                            {item.endDate !== ''
+                              ? format(new Date(item.endDate), 'MMMM yyyy')
+                              : 'Present'}
+                          </p>
+                        )}
+                        {item.location && <p>{item.location}</p>}
+                      </div>
                     </div>
-                    <div>
-                      {item.startDate && (
-                        <p className={styles.itemDate}>
-                          {format(new Date(item.startDate), 'MMMM yyyy')} -{' '}
-                          {item.endDate !== ''
-                            ? format(new Date(item.endDate), 'MMMM yyyy')
-                            : 'Present'}
-                        </p>
-                      )}
-                      {item.location && <p>{item.location}</p>}
-                    </div>
+                    {item.description && (
+                      <p>
+                        {item.description.split('\n').map((line, index) => (
+                          <span key={`${item.id}-${index}`}>
+                            {line}
+                            <br />
+                          </span>
+                        ))}
+                      </p>
+                    )}
                   </div>
-                  {item.description && (
-                    <p>
-                      {item.description.split('\n').map((line, index) => (
-                        <span key={index}>
-                          {line}
-                          <br />
-                        </span>
-                      ))}
-                    </p>
-                  )}
-                </div>
-              ))}
+                ))}
             </div>
           )}
         </div>

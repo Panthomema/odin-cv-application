@@ -1,8 +1,8 @@
+import { format } from 'date-fns';
 import { useRef, useState } from 'react';
 import Form from '../Form/Form';
 import FormField from '../FormField/FormField';
 import styles from './CreateProfessionalExperienceForm.module.css';
-import { format } from 'date-fns';
 
 export default function CreateProfessionalExperienceForm({
   onValidData,
@@ -162,7 +162,11 @@ export default function CreateProfessionalExperienceForm({
       ...prevData,
       professionalExperience: [
         ...(prevData.professionalExperience ?? []),
-        { id: crypto.randomUUID(), ...newProfessionalExperience },
+        {
+          id: crypto.randomUUID(),
+          visible: true,
+          ...newProfessionalExperience,
+        },
       ],
     }));
   };

@@ -15,6 +15,7 @@ export default function App() {
     },
     professionalExperience: [
       {
+        id: crypto.randomUUID(),
         companyName: 'PixelCraft Web Solutions',
         position: 'Frontend Developer',
         location: 'Madrid, Spain',
@@ -25,8 +26,10 @@ export default function App() {
           Optimized website performance, reducing load times by 30% through efficient asset management.
           Collaborated with backend developers to integrate APIs and improve user experience. 
           Led UI/UX improvements, enhancing website navigation and conversion rates.`,
+        visible: true,
       },
       {
+        id: crypto.randomUUID(),
         companyName: 'CodeWave Digital Agency',
         position: 'Web Developer',
         location: 'Barcelona, Spain',
@@ -37,6 +40,7 @@ export default function App() {
           Implemented SEO best practices, improving search rankings for multiple projects.  
           Created reusable components and templates to streamline development.  
           Provided technical support and debugging for website issues.`,
+        visible: false,
       },
     ],
   };
@@ -50,7 +54,7 @@ export default function App() {
           <Header />
         </div>
         <div className={styles.formsWrapper}>
-          <FormManager resumeData={resumeData} onFormSubmit={setResumeData} />
+          <FormManager resumeData={resumeData} onDataModify={setResumeData} />
         </div>
       </div>
       <div className={clsx(styles.column, styles.previewWrapper)}>
