@@ -3,7 +3,10 @@ import Form from '../Form/Form';
 import FormField from '../FormField/FormField';
 import styles from './CreateProfessionalExperienceForm.module.css';
 
-export default function CreateProfessionalExperienceForm({ onValidData, onCancel }) {
+export default function CreateProfessionalExperienceForm({
+  onValidData,
+  onCancel,
+}) {
   const [errors, setErrors] = useState({});
   const startDateRef = useRef(null);
   const endDateRef = useRef(null);
@@ -34,6 +37,10 @@ export default function CreateProfessionalExperienceForm({ onValidData, onCancel
     position: {
       tooShort: 'Position must be at least 2 characters.',
       tooLong: 'Position cannot exceed 50 characters.',
+    },
+    location: {
+      tooShort: 'Location must be at least 2 characters.',
+      tooLong: 'Location cannot exceed 50 characters.',
     },
     startDate: {
       rangeUnderflow: `Start date must be greater than ${minDateText}.`,
@@ -158,7 +165,10 @@ export default function CreateProfessionalExperienceForm({ onValidData, onCancel
     const newProfessionalExperience = Object.fromEntries(formData.entries());
     console.log(newProfessionalExperience);
 
-    if (newProfessionalExperience.startDate && ! newProfessionalExperience.endDate) {
+    if (
+      newProfessionalExperience.startDate &&
+      !newProfessionalExperience.endDate
+    ) {
       newProfessionalExperience.endDate = 'Present';
     }
 
@@ -194,6 +204,15 @@ export default function CreateProfessionalExperienceForm({ onValidData, onCancel
         onBlur={handleBlur}
         constraints={{ minLength: 2, maxLength: 50 }}
         error={errors.position}
+      />
+      <FormField
+        name="location"
+        type="text"
+        label="Location"
+        tag="optional"
+        onBlur={handleBlur}
+        constraints={{ minLength: 2, maxLength: 50 }}
+        error={errors.location}
       />
       <div className={styles.inlineFields}>
         <FormField

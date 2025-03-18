@@ -17,6 +17,7 @@ export default function App() {
       {
         companyName: 'PixelCraft Web Solutions',
         position: 'Frontend Developer',
+        location: 'Madrid, Spain',
         startDate: '2022-03',
         endDate: '2023-12',
         description:
@@ -28,6 +29,7 @@ export default function App() {
       {
         companyName: 'CodeWave Digital Agency',
         position: 'Web Developer',
+        location: 'Barcelona, Spain',
         startDate: '2021-01',
         endDate: '2022-02',
         description:

@@ -24,7 +24,7 @@ export default function EditPersonalDetailsForm({
     },
     location: {
       tooShort: 'Location must be at least 2 characters.',
-      tooLong: 'Location cannot exceed 100 characters.',
+      tooLong: 'Location cannot exceed 50 characters.',
     },
   };
 
@@ -123,7 +123,7 @@ export default function EditPersonalDetailsForm({
         tag="optional"
         value={data?.location}
         onBlur={handleBlur}
-        constraints={{ minLength: 2, maxLength: 100 }}
+        constraints={{ minLength: 2, maxLength: 50 }}
         error={errors.location}
       />
     </Form>
