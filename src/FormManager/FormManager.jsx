@@ -7,9 +7,7 @@ import styles from './FormManager.module.css';
 
 export default function FormManager({ resumeData, onFormSubmit }) {
   const [status, setStatus] = useState('viewing');
-  const { personalDetails } = resumeData;
-
-  console.log(resumeData);
+  const { personalDetails, workExperience } = resumeData;
 
   const handleCancel = () => {
     setStatus('viewing');
@@ -72,6 +70,7 @@ export default function FormManager({ resumeData, onFormSubmit }) {
         title="Work Experience"
         icon="work"
         onAddClick={() => setStatus('creating-experience')}
+        items={workExperience}
       />
     </nav>
   );
@@ -91,12 +90,14 @@ function PersonalDataListItem({ label, iconName, value }) {
   );
 }
 
-function Widget({ title, icon, onAddClick }) {
+function Widget({ title, icon, onAddClick, items }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
+
+  console.log(items);
 
   return (
     <div className={styles.widget}>
@@ -122,17 +123,28 @@ function Widget({ title, icon, onAddClick }) {
         </span>
       </button>
       {isOpen && (
-        <div
-          className={clsx(
-            utils.card,
-            utils.borderRadiusBottom,
-            styles.widgetAdd,
-          )}
-        >
-          <button onClick={onAddClick}>
-            <span className="material-symbols-outlined">add</span> {title}
-          </button>
-        </div>
+        <>
+          {items.map((item) => (
+            <button
+              key={item.id}
+              className={clsx(utils.card, styles.widgetItem)}
+            >
+              {item.companyName}
+              <span className="material-symbols-outlined">visibility_off</span>
+            </button>
+          ))}
+          <div
+            className={clsx(
+              utils.card,
+              utils.borderRadiusBottom,
+              styles.widgetAdd,
+            )}
+          >
+            <button onClick={onAddClick}>
+              <span className="material-symbols-outlined">add</span> {title}
+            </button>
+          </div>
+        </>
       )}
     </div>
   );

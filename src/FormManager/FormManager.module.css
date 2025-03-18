@@ -56,6 +56,12 @@
   gap: 0.5em;
 }
 
+.widgetItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .widgetAdd {
   display: grid;
   place-items: center;
