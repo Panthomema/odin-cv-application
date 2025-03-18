@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './Preview.module.css';
-import { formatDateYearMonthText } from '../utils/functions';
+import { format } from 'date-fns';
 
 const A4_WIDTH = 794;
 const A4_HEIGHT = 1123;
@@ -78,7 +78,7 @@ export default function Preview({ resumeData }) {
                   <div>
                     {item.startDate && (
                       <p>
-                        {formatDateYearMonthText(new Date(item.startDate))} - {formatDateYearMonthText(new Date(item.endDate))}
+                        {format(new Date(item.startDate), 'MMMM yyyy')} - {format(new Date(item.endDate), 'MMMM yyyy')}
                       </p>
                     )}
                     {item.location && <p>{item.location}</p>}

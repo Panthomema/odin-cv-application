@@ -1,11 +1,8 @@
 import { useRef, useState } from 'react';
 import Form from '../Form/Form';
 import FormField from '../FormField/FormField';
-import {
-  formatDateYearMonth,
-  formatDateYearMonthText,
-} from '../utils/functions';
 import styles from './CreateProfessionalExperienceForm.module.css';
+import { format } from 'date-fns';
 
 export default function CreateProfessionalExperienceForm({
   onValidData,
@@ -19,10 +16,10 @@ export default function CreateProfessionalExperienceForm({
   const fiftyYearsAgo = new Date();
   fiftyYearsAgo.setFullYear(fiftyYearsAgo.getFullYear() - 50);
 
-  const maxDate = formatDateYearMonth(today);
-  const maxDateText = formatDateYearMonthText(today);
-  const minDate = formatDateYearMonth(fiftyYearsAgo);
-  const minDateText = formatDateYearMonthText(fiftyYearsAgo);
+  const maxDate = format(today, 'yyyy-MM');
+  const maxDateText = format(today, 'MMMM yyyy');
+  const minDate = format(fiftyYearsAgo, 'yyyy-MM');
+  const minDateText = format(fiftyYearsAgo, 'MMM yyyy');
 
   const validationErrorMessages = {
     companyName: {
