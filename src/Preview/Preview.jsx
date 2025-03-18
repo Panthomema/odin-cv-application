@@ -7,7 +7,7 @@ const A4_HEIGHT = 1123;
 export default function Preview({ resumeData }) {
   const [scale, setScale] = useState(1);
   const containerRef = useRef(null);
-  const { personalDetails, professionalExperience } = resumeData; 
+  const { personalDetails, professionalExperience } = resumeData;
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -68,8 +68,32 @@ export default function Preview({ resumeData }) {
             )}
           </ul>
         </div>
-        {professionalExperience.length > 0 && <><h2>Professional Experience</h2>
-        </>}
+        <div className={styles.content}>
+          {professionalExperience.length > 0 && (
+            <div className={styles.section}>
+              <h2 className={styles.sectionTitle}>Professional Experience</h2>
+              {professionalExperience.map((item) => (
+                <div key={item.id} className={styles.sectionItem}>
+                  <div>
+                    {item.startDate && (
+                      <p>
+                        {item.startDate} - {item.endDate}
+                      </p>
+                    )}
+                    {item.location && <p>{item.location}</p>}
+                  </div>
+                  <div>
+                    <p>
+                      <strong>{item.companyName}</strong>
+                    </p>
+                    {item.position && <p><em>{item.position}</em></p>}
+                    {item.description && <p>{item.description}</p>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
