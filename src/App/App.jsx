@@ -9,10 +9,10 @@ import styles from './App.module.css';
 export default function App() {
   const [resumeData, setResumeData] = useState(INITIAL_DATA);
 
-  const updatePersonalDetails = (newDetails) => {
+  const updatePersonal = (newPersonal) => {
     setResumeData((prevData) => ({
       ...prevData,
-      personalDetails: { ...prevData.personalDetails, ...newDetails },
+      personal: { ...prevData.personal, ...newPersonal },
     }));
   };
 
@@ -47,7 +47,7 @@ export default function App() {
         <div className={styles.formsWrapper}>
           <FormManager
             resumeData={resumeData}
-            onPersonalDetailsEdit={updatePersonalDetails}
+            onPersonalEdit={updatePersonal}
             onExperienceCreate={addExperience}
             onExperienceEdit={updateExperience}
           />

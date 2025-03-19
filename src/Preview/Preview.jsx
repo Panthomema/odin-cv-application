@@ -8,7 +8,7 @@ const A4_HEIGHT = 1123;
 export default function Preview({ resumeData }) {
   const [scale, setScale] = useState(1);
   const containerRef = useRef(null);
-  const { personalDetails, experience } = resumeData;
+  const { personal, experience } = resumeData;
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -47,24 +47,24 @@ export default function Preview({ resumeData }) {
     <div className={styles.previewContainer} ref={containerRef}>
       <div className={styles.preview} style={{ transform: `scale(${scale})` }}>
         <div className={styles.personal}>
-          <h1>{personalDetails.fullName}</h1>
+          <h1>{personal.fullName}</h1>
           <ul className={styles.contact}>
-            {personalDetails.email && (
+            {personal.email && (
               <li>
                 <span className="material-symbols-outlined">mail</span>
-                {personalDetails.email}
+                {personal.email}
               </li>
             )}
-            {personalDetails.phoneNumber && (
+            {personal.phoneNumber && (
               <li>
                 <span className="material-symbols-outlined">call</span>
-                {personalDetails.phoneNumber}
+                {personal.phoneNumber}
               </li>
             )}
-            {personalDetails.location && (
+            {personal.location && (
               <li>
                 <span className="material-symbols-outlined">location_on</span>
-                {personalDetails.location}
+                {personal.location}
               </li>
             )}
           </ul>

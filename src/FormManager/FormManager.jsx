@@ -1,25 +1,25 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 import CreateExperienceForm from '../CreateExperienceForm/CreateExperienceForm';
-import EditPersonalDetailsForm from '../EditPersonalDetailsForm/EditPersonalDetailsForm';
+import EditPersonalForm from '../EditPersonalForm/EditPersonalForm';
 import utils from '../styles/Utils.module.css';
 import styles from './FormManager.module.css';
 
 export default function FormManager({
   resumeData,
-  onPersonalDetailsEdit,
+  onPersonalEdit,
   onExperienceCreate,
   onExperienceEdit,
 }) {
   const [status, setStatus] = useState('viewing');
-  const { personalDetails, experience } = resumeData;
+  const { personal, experience } = resumeData;
 
   const handleCancel = () => {
     setStatus('viewing');
   };
 
-  const handleEditPersonalDetailsSubmit = (newDetails) => {
-    onPersonalDetailsEdit(newDetails);
+  const handleEditPersonalSubmit = (newPersonal) => {
+    onPersonalEdit(newPersonal);
     setStatus('viewing');
   };
 
@@ -30,9 +30,9 @@ export default function FormManager({
 
   if (status === 'editing-personal') {
     return (
-      <EditPersonalDetailsForm
-        data={personalDetails}
-        onSubmit={handleEditPersonalDetailsSubmit}
+      <EditPersonalForm
+        data={personal}
+        onSubmit={handleEditPersonalSubmit}
         onCancel={handleCancel}
       />
     );
@@ -53,8 +53,8 @@ export default function FormManager({
         className={clsx(utils.card, utils.borderRadius, styles.personalData)}
         onClick={() => setStatus('editing-personal')}
       >
-        {personalDetails.fullName != '' ? (
-          <h2>{personalDetails.fullName}</h2>
+        {personal.fullName != '' ? (
+          <h2>{personal.fullName}</h2>
         ) : (
           <h2 className={styles.placeholderText}>Your name</h2>
         )}
@@ -62,17 +62,17 @@ export default function FormManager({
           <PersonalDataListItem
             label="Email"
             iconName="email"
-            value={personalDetails.email}
+            value={personal.email}
           />
           <PersonalDataListItem
             label="Phone Number"
             iconName="phone"
-            value={personalDetails.phoneNumber}
+            value={personal.phoneNumber}
           />
           <PersonalDataListItem
             label="Location"
             iconName="location_on"
-            value={personalDetails.location}
+            value={personal.location}
           />
         </ul>
       </button>

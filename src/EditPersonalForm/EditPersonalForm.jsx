@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Form from '../Form/Form';
 import FormField from '../FormField/FormField';
 
-export default function EditPersonalDetailsForm({ data, onSubmit, onCancel }) {
+export default function EditPersonalForm({ data, onSubmit, onCancel }) {
   const [errors, setErrors] = useState({});
 
   const validationErrorMessages = {
@@ -68,9 +68,9 @@ export default function EditPersonalDetailsForm({ data, onSubmit, onCancel }) {
     }
 
     const formData = new FormData(form);
-    const newPersonalDetails = Object.fromEntries(formData.entries());
+    const newPersonal = Object.fromEntries(formData.entries());
 
-    onSubmit(newPersonalDetails);
+    onSubmit(newPersonal);
   };
 
   return (

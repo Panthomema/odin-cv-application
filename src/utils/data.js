@@ -1,5 +1,5 @@
 export const INITIAL_DATA = {
-  personalDetails: {
+  personal: {
     fullName: 'Alejandro Martínez Fernández',
     email: 'alejandro.martinez@example.com',
     phoneNumber: '+34 678 123 456',
