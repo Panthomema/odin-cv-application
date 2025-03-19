@@ -83,48 +83,49 @@ function PersonalSection({ personal }) {
 
 function ExperenceSection({ experience }) {
   const visibleExperience = experience.filter(({ visible }) => visible);
+
+  if (!visibleExperience.length) return null;
+
   return (
-    visibleExperience.length > 0 && (
-      <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Professional Experience</h2>
-        {visibleExperience.map((item) => (
-          <div key={item.id} className={styles.sectionItem}>
-            <div className={styles.itemHeader}>
-              <div>
-                <p>
-                  <strong>{item.companyName}</strong>
-                </p>
-                {item.position && (
-                  <p>
-                    <em>{item.position}</em>
-                  </p>
-                )}
-              </div>
-              <div>
-                {item.startDate && (
-                  <p className={styles.itemDate}>
-                    {format(new Date(item.startDate), 'MMMM yyyy')} -{' '}
-                    {item.endDate !== ''
-                      ? format(new Date(item.endDate), 'MMMM yyyy')
-                      : 'Present'}
-                  </p>
-                )}
-                {item.location && <p>{item.location}</p>}
-              </div>
-            </div>
-            {item.description && (
+    <div className={styles.section}>
+      <h2 className={styles.sectionTitle}>Professional Experience</h2>
+      {visibleExperience.map((item) => (
+        <div key={item.id} className={styles.sectionItem}>
+          <div className={styles.itemHeader}>
+            <div>
               <p>
-                {item.description.split('\n').map((line, index) => (
-                  <span key={`${item.id}-${index}`}>
-                    {line}
-                    <br />
-                  </span>
-                ))}
+                <strong>{item.companyName}</strong>
               </p>
-            )}
+              {item.position && (
+                <p>
+                  <em>{item.position}</em>
+                </p>
+              )}
+            </div>
+            <div>
+              {item.startDate && (
+                <p className={styles.itemDate}>
+                  {format(new Date(item.startDate), 'MMMM yyyy')} -{' '}
+                  {item.endDate !== ''
+                    ? format(new Date(item.endDate), 'MMMM yyyy')
+                    : 'Present'}
+                </p>
+              )}
+              {item.location && <p>{item.location}</p>}
+            </div>
           </div>
-        ))}
-      </div>
-    )
+          {item.description && (
+            <p>
+              {item.description.split('\n').map((line, index) => (
+                <span key={`${item.id}-${index}`}>
+                  {line}
+                  <br />
+                </span>
+              ))}
+            </p>
+          )}
+        </div>
+      ))}
+    </div>
   );
 }
