@@ -5,7 +5,12 @@ import EditPersonalDetailsForm from '../EditPersonalDetailsForm/EditPersonalDeta
 import utils from '../styles/Utils.module.css';
 import styles from './FormManager.module.css';
 
-export default function FormManager({ resumeData, onDataModify }) {
+export default function FormManager({
+  resumeData,
+  onPersonalDetailsEdit,
+  onProfessionalExperienceCreate,
+  onProfessionalExperienceEdit,
+}) {
   const [status, setStatus] = useState('viewing');
   const { personalDetails, professionalExperience } = resumeData;
 
@@ -13,8 +18,13 @@ export default function FormManager({ resumeData, onDataModify }) {
     setStatus('viewing');
   };
 
-  const handleValidData = (data) => {
-    onDataModify(data);
+  const handleEditPersonalDetailsSubmit = (newDetails) => {
+    onPersonalDetailsEdit(newDetails);
+    setStatus('viewing');
+  };
+
+  const handleCreateProfessionalExperienceSubmit = (newExperience) => {
+    onProfessionalExperienceCreate(newExperience);
     setStatus('viewing');
   };
 
@@ -22,7 +32,7 @@ export default function FormManager({ resumeData, onDataModify }) {
     return (
       <EditPersonalDetailsForm
         data={personalDetails}
-        onValidData={handleValidData}
+        onSubmit={handleEditPersonalDetailsSubmit}
         onCancel={handleCancel}
       />
     );
@@ -31,7 +41,7 @@ export default function FormManager({ resumeData, onDataModify }) {
   if (status === 'creating-experience') {
     return (
       <CreateProfessionalExperienceForm
-        onValidData={handleValidData}
+        onSubmit={handleCreateProfessionalExperienceSubmit}
         onCancel={handleCancel}
       />
     );
@@ -98,14 +108,14 @@ function Widget({ title, icon, onAddClick, onVisibilityToggle, items }) {
     setIsOpen(!isOpen);
   };
 
-  const handleToggleVisibility = (e, itemId) => {
+  const handleVisibilityToggle = (e, itemId) => {
     e.stopPropagation();
 
     onVisibilityToggle((prevData) => ({
       ...prevData,
       professionalExperience: prevData.professionalExperience.map((item) => ({
         ...item,
-        visible: (item.id === itemId) ? !item.visible : item.visible,
+        visible: item.id === itemId ? !item.visible : item.visible,
       })),
     }));
   };
@@ -143,7 +153,7 @@ function Widget({ title, icon, onAddClick, onVisibilityToggle, items }) {
               {item.companyName}
               <span
                 className="material-symbols-outlined"
-                onClick={(e) => handleToggleVisibility(e, item.id)}
+                onClick={(e) => handleVisibilityToggle(e, item.id)}
               >
                 {item.visible ? 'visibility_off' : 'visibility'}
               </span>

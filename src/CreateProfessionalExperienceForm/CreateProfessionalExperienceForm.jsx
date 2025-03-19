@@ -5,7 +5,7 @@ import FormField from '../FormField/FormField';
 import styles from './CreateProfessionalExperienceForm.module.css';
 
 export default function CreateProfessionalExperienceForm({
-  onValidData,
+  onSubmit,
   onCancel,
 }) {
   const [errors, setErrors] = useState({});
@@ -155,20 +155,13 @@ export default function CreateProfessionalExperienceForm({
     }
 
     const formData = new FormData(form);
-    const newProfessionalExperience = Object.fromEntries(formData.entries());
-    console.log(newProfessionalExperience);
+    const newExperience = Object.fromEntries(formData.entries());
+    console.log(newExperience);
 
-    onValidData((prevData) => ({
-      ...prevData,
-      professionalExperience: [
-        ...(prevData.professionalExperience ?? []),
-        {
-          id: crypto.randomUUID(),
-          visible: true,
-          ...newProfessionalExperience,
-        },
-      ],
-    }));
+    newExperience.id = crypto.randomUUID();
+    newExperience.visible = true;
+
+    onSubmit(newExperience);
   };
 
   return (
