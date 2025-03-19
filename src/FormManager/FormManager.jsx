@@ -80,7 +80,7 @@ export default function FormManager({
         title="Professional Experience"
         icon="work"
         onAddClick={() => setStatus('creating-experience')}
-        onVisibilityToggle={onDataModify}
+        onVisibilityToggle={onExperienceEdit}
         items={experience}
       />
     </nav>
@@ -110,14 +110,9 @@ function Widget({ title, icon, onAddClick, onVisibilityToggle, items }) {
 
   const handleVisibilityToggle = (e, itemId) => {
     e.stopPropagation();
+    const item = items.find(({ id }) => id === itemId);
 
-    onVisibilityToggle((prevData) => ({
-      ...prevData,
-      professionalExperience: prevData.professionalExperience.map((item) => ({
-        ...item,
-        visible: item.id === itemId ? !item.visible : item.visible,
-      })),
-    }));
+    onVisibilityToggle(itemId, { ...item, visible: !item.visible });
   };
 
   return (
