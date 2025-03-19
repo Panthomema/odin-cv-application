@@ -16,20 +16,20 @@ export default function App() {
     }));
   };
 
-  const addProfessionalExperience = (newExperience) => {
+  const addExperience = (newExperience) => {
     setResumeData((prevData) => ({
       ...prevData,
-      professionalExperience: [
-        ...(prevData.professionalExperience ?? []),
+      experience: [
+        ...(prevData.experience ?? []),
         newExperience,
       ],
     }));
   };
 
-  const updateProfessionalExperience = (id, updatedExperience) => {
+  const updateExperience = (id, updatedExperience) => {
     setResumeData((prevData) => ({
       ...prevData,
-      professionalExperience: prevData.professionalExperience.map(
+      experience: prevData.experience.map(
         (experience) =>
           experience.id === id
             ? { ...experience, ...updatedExperience }
@@ -47,10 +47,9 @@ export default function App() {
         <div className={styles.formsWrapper}>
           <FormManager
             resumeData={resumeData}
-            onDataModify={setResumeData}
             onPersonalDetailsEdit={updatePersonalDetails}
-            onProfessionalExperienceCreate={addProfessionalExperience}
-            onProfessionalExperienceEdit={updateProfessionalExperience}
+            onExperienceCreate={addExperience}
+            onExperienceEdit={updateExperience}
           />
         </div>
       </div>

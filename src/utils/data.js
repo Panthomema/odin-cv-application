@@ -5,7 +5,7 @@ export const INITIAL_DATA = {
     phoneNumber: '+34 678 123 456',
     location: 'Barcelona, Spain',
   },
-  professionalExperience: [
+  experience: [
     {
       id: crypto.randomUUID(),
       companyName: 'PixelCraft Web Solutions',

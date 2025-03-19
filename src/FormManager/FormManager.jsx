@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useState } from 'react';
-import CreateProfessionalExperienceForm from '../CreateProfessionalExperienceForm/CreateProfessionalExperienceForm';
+import CreateExperienceForm from '../CreateExperienceForm/CreateExperienceForm';
 import EditPersonalDetailsForm from '../EditPersonalDetailsForm/EditPersonalDetailsForm';
 import utils from '../styles/Utils.module.css';
 import styles from './FormManager.module.css';
@@ -8,11 +8,11 @@ import styles from './FormManager.module.css';
 export default function FormManager({
   resumeData,
   onPersonalDetailsEdit,
-  onProfessionalExperienceCreate,
-  onProfessionalExperienceEdit,
+  onExperienceCreate,
+  onExperienceEdit,
 }) {
   const [status, setStatus] = useState('viewing');
-  const { personalDetails, professionalExperience } = resumeData;
+  const { personalDetails, experience } = resumeData;
 
   const handleCancel = () => {
     setStatus('viewing');
@@ -23,8 +23,8 @@ export default function FormManager({
     setStatus('viewing');
   };
 
-  const handleCreateProfessionalExperienceSubmit = (newExperience) => {
-    onProfessionalExperienceCreate(newExperience);
+  const handleCreateExperienceSubmit = (newExperience) => {
+    onExperienceCreate(newExperience);
     setStatus('viewing');
   };
 
@@ -40,8 +40,8 @@ export default function FormManager({
 
   if (status === 'creating-experience') {
     return (
-      <CreateProfessionalExperienceForm
-        onSubmit={handleCreateProfessionalExperienceSubmit}
+      <CreateExperienceForm
+        onSubmit={handleCreateExperienceSubmit}
         onCancel={handleCancel}
       />
     );
@@ -81,7 +81,7 @@ export default function FormManager({
         icon="work"
         onAddClick={() => setStatus('creating-experience')}
         onVisibilityToggle={onDataModify}
-        items={professionalExperience}
+        items={experience}
       />
     </nav>
   );

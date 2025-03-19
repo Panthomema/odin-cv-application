@@ -8,7 +8,7 @@ const A4_HEIGHT = 1123;
 export default function Preview({ resumeData }) {
   const [scale, setScale] = useState(1);
   const containerRef = useRef(null);
-  const { personalDetails, professionalExperience } = resumeData;
+  const { personalDetails, experience } = resumeData;
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -70,10 +70,10 @@ export default function Preview({ resumeData }) {
           </ul>
         </div>
         <div className={styles.content}>
-          {professionalExperience.some(({ visible }) => visible) && (
+          {experience.some(({ visible }) => visible) && (
             <div className={styles.section}>
               <h2 className={styles.sectionTitle}>Professional Experience</h2>
-              {professionalExperience
+              {experience
                 .filter(({ visible }) => visible)
                 .map((item) => (
                   <div key={item.id} className={styles.sectionItem}>
