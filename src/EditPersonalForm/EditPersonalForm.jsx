@@ -109,7 +109,7 @@ export default function EditPersonalForm({ data, onSubmit, onCancel }) {
         tag="recommended"
         value={data?.phoneNumber}
         onBlur={handleBlur}
-        constraints={{ pattern: '\\+?[0-9]{7,15}' }}
+        constraints={{ pattern: '\\+?\\d(?:\\s?[\\d\\-]){6,14}' }}
         error={errors.phoneNumber}
       />
       <FormField
