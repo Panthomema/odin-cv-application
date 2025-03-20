@@ -9,10 +9,10 @@ import styles from './App.module.css';
 export default function App() {
   const [resumeData, setResumeData] = useState(INITIAL_DATA);
 
-  const updatePersonal = (newPersonal) => {
+  const updatePersonal = (updatedPersonal) => {
     setResumeData((prevData) => ({
       ...prevData,
-      personal: { ...prevData.personal, ...newPersonal },
+      personal: { ...prevData.personal, ...updatedPersonal },
     }));
   };
 

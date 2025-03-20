@@ -145,7 +145,7 @@ function Widget({ title, icon, onAddClick, onVisibilityToggle, items }) {
               key={item.id}
               className={clsx(utils.card, styles.widgetItem)}
             >
-              {item.companyName}
+              <p>{item.companyName}</p>
               <span
                 className="material-symbols-outlined"
                 onClick={(e) => handleVisibilityToggle(e, item.id)}

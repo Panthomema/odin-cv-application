@@ -68,9 +68,12 @@ export default function EditPersonalForm({ data, onSubmit, onCancel }) {
     }
 
     const formData = new FormData(form);
-    const newPersonal = Object.fromEntries(formData.entries());
 
-    onSubmit(newPersonal);
+    const updatedPersonal = Object.fromEntries(
+      formData.entries().map(([key, value]) => [key, value.trim()]),
+    );
+
+    onSubmit(updatedPersonal);
   };
 
   return (

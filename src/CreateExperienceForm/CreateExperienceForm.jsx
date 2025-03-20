@@ -4,10 +4,7 @@ import Form from '../Form/Form';
 import FormField from '../FormField/FormField';
 import styles from './CreateExperienceForm.module.css';
 
-export default function CreateExperienceForm({
-  onSubmit,
-  onCancel,
-}) {
+export default function CreateExperienceForm({ onSubmit, onCancel }) {
   const [errors, setErrors] = useState({});
   const startDateRef = useRef(null);
   const endDateRef = useRef(null);
@@ -155,7 +152,9 @@ export default function CreateExperienceForm({
     }
 
     const formData = new FormData(form);
-    const newExperience = Object.fromEntries(formData.entries());
+    const newExperience = Object.fromEntries(
+      formData.entries().map(([key, value]) => [key, value.trim()]),
+    );
     console.log(newExperience);
 
     newExperience.id = crypto.randomUUID();
