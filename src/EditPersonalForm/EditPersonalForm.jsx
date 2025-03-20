@@ -1,53 +1,27 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import Form from '../Form/Form';
 import FormField from '../FormField/FormField';
+import { constraints, getErrorMessage } from '../utils/validation';
 
 export default function EditPersonalForm({ data, onSubmit, onCancel }) {
   const [errors, setErrors] = useState({});
 
-  const validationErrorMessages = {
-    fullName: {
-      valueMissing: 'Full name is required.',
-      tooShort: 'Full name must be at least 2 characters.',
-      tooLong: 'Full name cannot exceed 40 characters.',
-    },
-    email: {
-      typeMismatch: 'Please enter a valid email address.',
-      tooLong: 'Email cannot exceed 320 characters.',
-    },
-    phoneNumber: {
-      patternMismatch: 'Please provide a valid phone number.',
-    },
-    location: {
-      tooShort: 'Location must be at least 2 characters.',
-      tooLong: 'Location cannot exceed 50 characters.',
-    },
-  };
-
-  const getErrorMessage = (field) => {
-    const rules = validationErrorMessages[field.name];
-    if (!rules) return null;
-
-    for (const [rule, message] of Object.entries(rules)) {
-      if (field.validity[rule]) return message;
-    }
-
-    return null;
-  };
-
-  const handleBlur = (e) => {
+  const handleBlur = useCallback((e) => {
     const field = e.target;
-    if (field.tagName !== 'INPUT') return;
 
-    const errorMessage = !field.checkValidity()
-      ? (getErrorMessage(field) ?? field.validationMessage)
-      : null;
+    if (field.tagName !== 'INPUT' || field.checkValidity()) return;
 
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [field.name]: errorMessage,
-    }));
-  };
+    const errorMessage = getErrorMessage(field) ?? field.validationMessage;
+
+    setErrors((prevErrors) =>
+      prevErrors[field.name] === errorMessage
+        ? prevErrors
+        : {
+            ...prevErrors,
+            [field.name]: errorMessage,
+          },
+    );
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -89,7 +63,7 @@ export default function EditPersonalForm({ data, onSubmit, onCancel }) {
         tag="required"
         value={data?.fullName}
         onBlur={handleBlur}
-        constraints={{ required: true, minLength: 2, maxLength: 40 }}
+        constraints={constraints.fullName}
         error={errors.fullName}
       />
       <FormField
@@ -99,7 +73,7 @@ export default function EditPersonalForm({ data, onSubmit, onCancel }) {
         tag="recommended"
         value={data?.email}
         onBlur={handleBlur}
-        constraints={{ maxLength: 320 }}
+        constraints={constraints.email}
         error={errors.email}
       />
       <FormField
@@ -109,7 +83,7 @@ export default function EditPersonalForm({ data, onSubmit, onCancel }) {
         tag="recommended"
         value={data?.phoneNumber}
         onBlur={handleBlur}
-        constraints={{ pattern: '\\+?\\d(?:\\s?[\\d\\-]){6,14}' }}
+        constraints={constraints.phoneNumber}
         error={errors.phoneNumber}
       />
       <FormField
@@ -119,7 +93,7 @@ export default function EditPersonalForm({ data, onSubmit, onCancel }) {
         tag="optional"
         value={data?.location}
         onBlur={handleBlur}
-        constraints={{ minLength: 2, maxLength: 50 }}
+        constraints={constraints.location}
         error={errors.location}
       />
     </Form>
