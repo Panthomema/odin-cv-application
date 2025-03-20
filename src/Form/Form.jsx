@@ -1,6 +1,6 @@
+import clsx from 'clsx';
 import utils from '../styles/Utils.module.css';
 import styles from './Form.module.css';
-import clsx from 'clsx';
 
 export default function Form({ title, children, onSubmit, onCancel }) {
   return (
@@ -12,20 +12,26 @@ export default function Form({ title, children, onSubmit, onCancel }) {
       <h2>{title}</h2>
       {children}
       <div className={styles.buttonsArea}>
-        <button
-          type="button"
-          className={clsx(styles.button, styles.buttonSecondary)}
-          onClick={onCancel}
-        >
+        <Button type="button" onClick={onCancel} variant="secondary">
           Cancel
-        </button>
-        <button
-          type="submit"
-          className={clsx(styles.button, styles.buttonPrimary)}
-        >
-          Save
-        </button>
+        </Button>
+        <Button type="submit">Save</Button>
       </div>
     </form>
+  );
+}
+
+function Button({ type, onClick, children, variant = 'primary' }) {
+  return (
+    <button
+      type={type}
+      className={clsx(styles.button, {
+        [styles.buttonPrimary]: variant === 'primary',
+        [styles.buttonSecondary]: variant === 'secondary',
+      })}
+      onClick={onClick}
+    >
+      {children}
+    </button>
   );
 }
