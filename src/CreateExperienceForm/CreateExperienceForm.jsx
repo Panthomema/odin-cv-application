@@ -92,14 +92,12 @@ export default function CreateExperienceForm({ onSubmit, onCancel }) {
         (field.tagName === 'INPUT' || field.tagName === 'TEXTAREA') &&
         !field.checkValidity()
       ) {
-        console.log(field.validity);
         newErrors[field.name] =
           getErrorMessage(field) ?? field.validationMessage;
       }
     });
 
     if (Object.keys(newErrors).length > 0) {
-      console.log(newErrors);
       setErrors(newErrors);
       return;
     }
@@ -108,7 +106,6 @@ export default function CreateExperienceForm({ onSubmit, onCancel }) {
     const newExperience = Object.fromEntries(
       formData.entries().map(([key, value]) => [key, value.trim()]),
     );
-    console.log(newExperience);
 
     newExperience.id = crypto.randomUUID();
     newExperience.visible = true;

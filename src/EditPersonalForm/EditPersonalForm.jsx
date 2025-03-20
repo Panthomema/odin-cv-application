@@ -36,7 +36,6 @@ export default function EditPersonalForm({ data, onSubmit, onCancel }) {
     });
 
     if (Object.keys(newErrors).length > 0) {
-      console.log(newErrors);
       setErrors(newErrors);
       return;
     }
