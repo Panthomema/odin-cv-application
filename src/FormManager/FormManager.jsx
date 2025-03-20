@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 import CreateExperienceForm from '../CreateExperienceForm/CreateExperienceForm';
+import EditExperienceForm from '../EditExperienceForm/EditExperienceForm';
 import EditPersonalForm from '../EditPersonalForm/EditPersonalForm';
 import utils from '../styles/Utils.module.css';
 import styles from './FormManager.module.css';
@@ -15,6 +16,7 @@ export default function FormManager({
     MAIN_MENU: { mode: 'main-menu' },
     EDIT_PERSONAL: { mode: 'edit-personal' },
     CREATE_EXPERIENCE: { mode: 'create-experience' },
+    EDIT_EXPERIENCE: (id) => ({ mode: 'edit-experience', id: id }),
   };
 
   const [uiState, setUiState] = useState(UI_STATES.MAIN_MENU);
@@ -34,6 +36,11 @@ export default function FormManager({
     setUiState(UI_STATES.MAIN_MENU);
   };
 
+  const handleEditExperienceSubmit = (id, updatedExperience) => {
+    onExperienceEdit(id, updatedExperience);
+    setUiState(UI_STATES.MAIN_MENU);
+  };
+
   if (uiState.mode === UI_STATES.EDIT_PERSONAL.mode) {
     return (
       <EditPersonalForm
@@ -48,6 +55,16 @@ export default function FormManager({
     return (
       <CreateExperienceForm
         onSubmit={handleCreateExperienceSubmit}
+        onCancel={handleCancel}
+      />
+    );
+  }
+
+  if (uiState.mode === UI_STATES.EDIT_EXPERIENCE().mode) {
+    return (
+      <EditExperienceForm
+        item={experience.find(({ id }) => uiState.id === id)}
+        onSubmit={handleEditExperienceSubmit}
         onCancel={handleCancel}
       />
     );
@@ -86,6 +103,7 @@ export default function FormManager({
         title="Professional Experience"
         icon="work"
         onAddClick={() => setUiState(UI_STATES.CREATE_EXPERIENCE)}
+        onEditClick={(id) => setUiState(UI_STATES.EDIT_EXPERIENCE(id))}
         onVisibilityToggle={onExperienceEdit}
         items={experience}
       />
@@ -107,12 +125,24 @@ function PersonalListItem({ label, iconName, value }) {
   );
 }
 
-function Widget({ title, icon, onAddClick, onVisibilityToggle, items }) {
+function Widget({
+  title,
+  icon,
+  onAddClick,
+  onEditClick,
+  onVisibilityToggle,
+  items,
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleEditClick = (e, itemId) => {
+    e.stopPropagation();
+    onEditClick(itemId)
+  }
 
   const handleVisibilityToggle = (e, itemId, isVisible) => {
     e.stopPropagation();
@@ -148,6 +178,7 @@ function Widget({ title, icon, onAddClick, onVisibilityToggle, items }) {
             <button
               key={item.id}
               className={clsx(utils.card, styles.widgetItem)}
+              onClick={(e) => handleEditClick(e, item.id)}
             >
               <p>{item.companyName}</p>
               <span

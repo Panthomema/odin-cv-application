@@ -6,12 +6,14 @@ import {
   errorMessages,
   getErrorMessage,
 } from '../utils/validation';
-import styles from './CreateExperienceForm.module.css';
+import styles from './EditExperienceForm.module.css';
 
-export default function CreateExperienceForm({ onSubmit, onCancel }) {
+export default function EditExperienceForm({ item, onSubmit, onCancel }) {
   const [errors, setErrors] = useState({});
   const startDateRef = useRef(null);
   const endDateRef = useRef(null);
+
+  console.log(item);
 
   const handleBlur = (e) => {
     const field = e.target;
@@ -118,7 +120,7 @@ export default function CreateExperienceForm({ onSubmit, onCancel }) {
 
   return (
     <Form
-      title="Create Professional Experience"
+      title="Edit Professional Experience"
       onSubmit={handleSubmit}
       onCancel={onCancel}
     >
