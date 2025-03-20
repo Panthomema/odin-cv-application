@@ -1,74 +1,27 @@
-import { format } from 'date-fns';
 import { useRef, useState } from 'react';
 import Form from '../Form/Form';
 import FormField from '../FormField/FormField';
+import {
+  constraints,
+  errorMessages,
+  getErrorMessage,
+} from '../utils/validation';
 import styles from './CreateExperienceForm.module.css';
 
-export default function EditExperienceForm({ onSubmit, onCancel }) {
+export default function CreateExperienceForm({ onSubmit, onCancel }) {
   const [errors, setErrors] = useState({});
   const startDateRef = useRef(null);
   const endDateRef = useRef(null);
 
-  const today = new Date();
-  const fiftyYearsAgo = new Date();
-  fiftyYearsAgo.setFullYear(fiftyYearsAgo.getFullYear() - 50);
-
-  const maxDate = format(today, 'yyyy-MM');
-  const maxDateText = format(today, 'MMMM yyyy');
-  const minDate = format(fiftyYearsAgo, 'yyyy-MM');
-  const minDateText = format(fiftyYearsAgo, 'MMM yyyy');
-
-  const validationErrorMessages = {
-    companyName: {
-      valueMissing: 'Company name is required.',
-      tooShort: 'Company name must be at least 2 characters.',
-      tooLong: 'Company name cannot exceed 40 characters.',
-    },
-    position: {
-      tooShort: 'Position must be at least 2 characters.',
-      tooLong: 'Position cannot exceed 50 characters.',
-    },
-    location: {
-      tooShort: 'Location must be at least 2 characters.',
-      tooLong: 'Location cannot exceed 50 characters.',
-    },
-    startDate: {
-      rangeUnderflow: `Start date must be greater than ${minDateText}.`,
-      rangeOverflow: `Start date must be lower than ${maxDateText}.`,
-      badInput: 'Start date requires month and year.',
-      valueMissing: 'Start date is required if end date is provided.',
-      greaterThanEnd: "Start date can't be greater than end date.",
-    },
-    endDate: {
-      rangeUnderflow: `End date must be greater than ${minDateText}.`,
-      rangeOverflow: `End date must be lower than ${maxDateText}.`,
-      badInput: 'End date requires month and year.',
-      lowerThanStart: "End date can't be lower than start date.",
-    },
-    description: {
-      tooShort: 'Description must be at least 10 characters.',
-      tooLong: 'Description cannot exceed 500 characters.',
-    },
-  };
-
-  const getErrorMessage = (field) => {
-    const rules = validationErrorMessages[field.name];
-    if (!rules) return null;
-
-    for (const [rule, message] of Object.entries(rules)) {
-      if (field.validity[rule]) return message;
-    }
-
-    return null;
-  };
-
   const handleBlur = (e) => {
     const field = e.target;
-    if (field.tagName !== 'INPUT' && field.tagName !== 'TEXTAREA') return;
+    if (
+      (field.tagName !== 'INPUT' && field.tagName !== 'TEXTAREA') ||
+      field.checkValidity()
+    )
+      return;
 
-    const errorMessage = !field.checkValidity()
-      ? (getErrorMessage(field) ?? field.validationMessage)
-      : null;
+    const errorMessage = getErrorMessage(field) ?? field.validationMessage;
 
     setErrors((prevErrors) => ({
       ...prevErrors,
@@ -83,17 +36,17 @@ export default function EditExperienceForm({ onSubmit, onCancel }) {
     let startDateErrorMessage = null;
     let endDateErrorMessage = null;
 
-    if (endDateField.value && !startDateField.value) {
-      startDateErrorMessage = validationErrorMessages.startDate.valueMissing;
+    if (endDateField?.value && !startDateField?.value) {
+      startDateErrorMessage = errorMessages.startDate.valueMissing;
     }
 
     if (
-      startDateField.value &&
-      endDateField.value &&
-      new Date(startDateField.value) > new Date(endDateField.value)
+      startDateField?.value &&
+      endDateField?.value &&
+      new Date(startDateField?.value) > new Date(endDateField?.value)
     ) {
-      startDateErrorMessage = validationErrorMessages.startDate.greaterThanEnd;
-      endDateErrorMessage = validationErrorMessages.endDate.lowerThanStart;
+      startDateErrorMessage = errorMessages.startDate.greaterThanEnd;
+      endDateErrorMessage = errorMessages.endDate.lowerThanStart;
     }
 
     if (!startDateField.checkValidity()) {
@@ -121,17 +74,17 @@ export default function EditExperienceForm({ onSubmit, onCancel }) {
 
     const newErrors = {};
 
-    if (endDateField.value && !startDateField.value) {
-      newErrors.startDate = validationErrorMessages.startDate.valueMissing;
+    if (endDateField?.value && !startDateField?.value) {
+      newErrors.startDate = errorMessages.startDate.valueMissing;
     }
 
     if (
-      startDateField.value &&
-      endDateField.value &&
-      new Date(startDateField.value) > new Date(endDateField.value)
+      startDateField?.value &&
+      endDateField?.value &&
+      new Date(startDateField?.value) > new Date(endDateField?.value)
     ) {
-      newErrors.startDate = validationErrorMessages.startDate.greaterThanEnd;
-      newErrors.endDate = validationErrorMessages.endDate.lowerThanStart;
+      newErrors.startDate = errorMessages.startDate.greaterThanEnd;
+      newErrors.endDate = errorMessages.endDate.lowerThanStart;
     }
 
     Array.from(form.elements).forEach((field) => {
@@ -152,7 +105,9 @@ export default function EditExperienceForm({ onSubmit, onCancel }) {
     }
 
     const formData = new FormData(form);
-    const newExperience = Object.fromEntries(formData.entries());
+    const newExperience = Object.fromEntries(
+      formData.entries().map(([key, value]) => [key, value.trim()]),
+    );
     console.log(newExperience);
 
     newExperience.id = crypto.randomUUID();
@@ -163,7 +118,7 @@ export default function EditExperienceForm({ onSubmit, onCancel }) {
 
   return (
     <Form
-      title="Edit Professional Experience"
+      title="Create Professional Experience"
       onSubmit={handleSubmit}
       onCancel={onCancel}
     >
@@ -173,7 +128,7 @@ export default function EditExperienceForm({ onSubmit, onCancel }) {
         label="Company Name"
         tag="required"
         onBlur={handleBlur}
-        constraints={{ required: true, minLength: 2, maxLength: 40 }}
+        constraints={constraints.companyName}
         error={errors.companyName}
       />
       <FormField
@@ -182,7 +137,7 @@ export default function EditExperienceForm({ onSubmit, onCancel }) {
         label="Position"
         tag="recommended"
         onBlur={handleBlur}
-        constraints={{ minLength: 2, maxLength: 50 }}
+        constraints={constraints.position}
         error={errors.position}
       />
       <FormField
@@ -191,7 +146,7 @@ export default function EditExperienceForm({ onSubmit, onCancel }) {
         label="Location"
         tag="optional"
         onBlur={handleBlur}
-        constraints={{ minLength: 2, maxLength: 50 }}
+        constraints={constraints.location}
         error={errors.location}
       />
       <div className={styles.inlineFields}>
@@ -202,7 +157,7 @@ export default function EditExperienceForm({ onSubmit, onCancel }) {
           label="Start Date"
           tag="optional"
           onBlur={handleDateBlur}
-          constraints={{ min: minDate, max: maxDate }}
+          constraints={constraints.startDate}
           error={errors.startDate}
         />
         <FormField
@@ -212,7 +167,7 @@ export default function EditExperienceForm({ onSubmit, onCancel }) {
           label="End Date"
           tag="optional"
           onBlur={handleDateBlur}
-          constraints={{ min: minDate, max: maxDate }}
+          constraints={constraints.endDate}
           error={errors.endDate}
         />
       </div>
@@ -222,7 +177,7 @@ export default function EditExperienceForm({ onSubmit, onCancel }) {
         label="Description"
         tag="recommended"
         onBlur={handleBlur}
-        constraints={{ minLength: 20, maxLength: 500 }}
+        constraints={constraints.description}
         error={errors.description}
       />
     </Form>
