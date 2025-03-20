@@ -11,24 +11,30 @@ export default function FormManager({
   onExperienceCreate,
   onExperienceEdit,
 }) {
-  const [status, setStatus] = useState('viewing');
+  const UI_STATES = {
+    MAIN_MENU: { mode: 'main-menu' },
+    EDIT_PERSONAL: { mode: 'edit-personal' },
+    CREATE_EXPERIENCE: { mode: 'create-experience' },
+  };
+
+  const [uiState, setUiState] = useState(UI_STATES.MAIN_MENU);
   const { personal, experience } = resumeData;
 
   const handleCancel = () => {
-    setStatus('viewing');
+    setUiState(UI_STATES.MAIN_MENU);
   };
 
   const handleEditPersonalSubmit = (newPersonal) => {
     onPersonalEdit(newPersonal);
-    setStatus('viewing');
+    setUiState(UI_STATES.MAIN_MENU);
   };
 
   const handleCreateExperienceSubmit = (newExperience) => {
     onExperienceCreate(newExperience);
-    setStatus('viewing');
+    setUiState(UI_STATES.MAIN_MENU);
   };
 
-  if (status === 'editing-personal') {
+  if (uiState.mode === UI_STATES.EDIT_PERSONAL.mode) {
     return (
       <EditPersonalForm
         data={personal}
@@ -38,7 +44,7 @@ export default function FormManager({
     );
   }
 
-  if (status === 'creating-experience') {
+  if (uiState.mode === UI_STATES.CREATE_EXPERIENCE.mode) {
     return (
       <CreateExperienceForm
         onSubmit={handleCreateExperienceSubmit}
@@ -50,26 +56,26 @@ export default function FormManager({
   return (
     <nav className={styles.formManager}>
       <button
-        className={clsx(utils.card, utils.borderRadius, styles.personalData)}
-        onClick={() => setStatus('editing-personal')}
+        className={clsx(utils.card, utils.borderRadius, styles.personal)}
+        onClick={() => setUiState(UI_STATES.EDIT_PERSONAL)}
       >
-        {personal.fullName != '' ? (
+        {personal.fullName.trim() != '' ? (
           <h2>{personal.fullName}</h2>
         ) : (
           <h2 className={styles.placeholderText}>Your name</h2>
         )}
         <ul>
-          <PersonalDataListItem
+          <PersonalListItem
             label="Email"
             iconName="email"
             value={personal.email}
           />
-          <PersonalDataListItem
+          <PersonalListItem
             label="Phone Number"
             iconName="phone"
             value={personal.phoneNumber}
           />
-          <PersonalDataListItem
+          <PersonalListItem
             label="Location"
             iconName="location_on"
             value={personal.location}
@@ -79,7 +85,7 @@ export default function FormManager({
       <Widget
         title="Professional Experience"
         icon="work"
-        onAddClick={() => setStatus('creating-experience')}
+        onAddClick={() => setUiState(UI_STATES.CREATE_EXPERIENCE)}
         onVisibilityToggle={onExperienceEdit}
         items={experience}
       />
@@ -87,8 +93,8 @@ export default function FormManager({
   );
 }
 
-function PersonalDataListItem({ label, iconName, value }) {
-  return value != '' ? (
+function PersonalListItem({ label, iconName, value }) {
+  return value.trim() != '' ? (
     <li>
       <span className="material-symbols-outlined">{iconName}</span>
       {value}
@@ -108,11 +114,9 @@ function Widget({ title, icon, onAddClick, onVisibilityToggle, items }) {
     setIsOpen(!isOpen);
   };
 
-  const handleVisibilityToggle = (e, itemId) => {
+  const handleVisibilityToggle = (e, itemId, isVisible) => {
     e.stopPropagation();
-    const item = items.find(({ id }) => id === itemId);
-
-    onVisibilityToggle(itemId, { ...item, visible: !item.visible });
+    onVisibilityToggle(itemId, { visible: isVisible });
   };
 
   return (
@@ -148,7 +152,9 @@ function Widget({ title, icon, onAddClick, onVisibilityToggle, items }) {
               <p>{item.companyName}</p>
               <span
                 className="material-symbols-outlined"
-                onClick={(e) => handleVisibilityToggle(e, item.id)}
+                onClick={(e) =>
+                  handleVisibilityToggle(e, item.id, !item.visible)
+                }
               >
                 {item.visible ? 'visibility_off' : 'visibility'}
               </span>

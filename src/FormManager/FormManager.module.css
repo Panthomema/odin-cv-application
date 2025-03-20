@@ -8,7 +8,7 @@
   cursor: pointer;
 }
 
-.personalData {
+.personal {
   text-align: left;
   color: var(--color-text);
   display: flex;
@@ -16,17 +16,17 @@
   gap: var(--spacing-ui);
 }
 
-.personalData h2 {
+.personal h2 {
   text-wrap: wrap;
 }
 
-.personalData ul {
+.personal ul {
   display: flex;
   flex-direction: column;
   gap: 1em;
 }
 
-.personalData li {
+.personal li {
   display: flex;
   align-items: center;
   gap: 0.7em;
