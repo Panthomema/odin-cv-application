@@ -13,8 +13,6 @@ export default function EditExperienceForm({ item, onSubmit, onCancel }) {
   const startDateRef = useRef(null);
   const endDateRef = useRef(null);
 
-  console.log(item);
-
   const handleBlur = (e) => {
     const field = e.target;
     if (
@@ -107,15 +105,11 @@ export default function EditExperienceForm({ item, onSubmit, onCancel }) {
     }
 
     const formData = new FormData(form);
-    const newExperience = Object.fromEntries(
+    const updatedExperience = Object.fromEntries(
       formData.entries().map(([key, value]) => [key, value.trim()]),
     );
-    console.log(newExperience);
 
-    newExperience.id = crypto.randomUUID();
-    newExperience.visible = true;
-
-    onSubmit(newExperience);
+    onSubmit(item.id, updatedExperience);
   };
 
   return (
@@ -129,6 +123,7 @@ export default function EditExperienceForm({ item, onSubmit, onCancel }) {
         type="text"
         label="Company Name"
         tag="required"
+        value={item.companyName}
         onBlur={handleBlur}
         constraints={constraints.companyName}
         error={errors.companyName}
@@ -138,6 +133,7 @@ export default function EditExperienceForm({ item, onSubmit, onCancel }) {
         type="text"
         label="Position"
         tag="recommended"
+        value={item.position}
         onBlur={handleBlur}
         constraints={constraints.position}
         error={errors.position}
@@ -147,6 +143,7 @@ export default function EditExperienceForm({ item, onSubmit, onCancel }) {
         type="text"
         label="Location"
         tag="optional"
+        value={item.location}
         onBlur={handleBlur}
         constraints={constraints.location}
         error={errors.location}
@@ -158,6 +155,7 @@ export default function EditExperienceForm({ item, onSubmit, onCancel }) {
           type="month"
           label="Start Date"
           tag="optional"
+          value={item.startDate}
           onBlur={handleDateBlur}
           constraints={constraints.startDate}
           error={errors.startDate}
@@ -168,6 +166,7 @@ export default function EditExperienceForm({ item, onSubmit, onCancel }) {
           type="month"
           label="End Date"
           tag="optional"
+          value={item.endDate}
           onBlur={handleDateBlur}
           constraints={constraints.endDate}
           error={errors.endDate}
@@ -178,6 +177,7 @@ export default function EditExperienceForm({ item, onSubmit, onCancel }) {
         type="textarea"
         label="Description"
         tag="recommended"
+        value={item.description}
         onBlur={handleBlur}
         constraints={constraints.description}
         error={errors.description}
