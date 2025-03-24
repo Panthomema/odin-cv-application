@@ -33,4 +33,14 @@ export const INITIAL_DATA = {
       visible: false,
     },
   ],
+  education: [
+    {
+      id: crypto.randomUUID(),
+      institution: 'Universitat Politècnica de Catalunya',
+      title: 'Bachelor’s Degree in Computer Science',
+      startDate: '2017-09',
+      endDate: '2021-06',
+      visible: true,
+    },
+  ],
 };
