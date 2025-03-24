@@ -16,24 +16,20 @@ export default function App() {
     }));
   };
 
-  const addExperience = (newExperience) => {
+  const storeExperience = (newExperience) => {
     setResumeData((prevData) => ({
       ...prevData,
-      experience: [
-        ...(prevData.experience ?? []),
-        newExperience,
-      ],
+      experience: [...(prevData.experience ?? []), newExperience],
     }));
   };
 
   const updateExperience = (id, updatedExperience) => {
     setResumeData((prevData) => ({
       ...prevData,
-      experience: prevData.experience.map(
-        (experience) =>
-          experience.id === id
-            ? { ...experience, ...updatedExperience }
-            : experience,
+      experience: prevData.experience.map((experience) =>
+        experience.id === id
+          ? { ...experience, ...updatedExperience }
+          : experience,
       ),
     }));
   };
@@ -41,9 +37,11 @@ export default function App() {
   const deleteExperience = (id) => {
     setResumeData((prevData) => ({
       ...prevData,
-      experience: prevData.experience.filter((experience) => experience.id !== id),
+      experience: prevData.experience.filter(
+        (experience) => experience.id !== id,
+      ),
     }));
-  }
+  };
 
   return (
     <div className={styles.app}>
@@ -55,7 +53,7 @@ export default function App() {
           <FormManager
             resumeData={resumeData}
             onPersonalEdit={updatePersonal}
-            onExperienceCreate={addExperience}
+            onExperienceCreate={storeExperience}
             onExperienceEdit={updateExperience}
             onExperienceDelete={deleteExperience}
           />
