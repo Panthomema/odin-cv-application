@@ -10,8 +10,6 @@ export default function Form({
   canDelete = false,
   onDeleteClick,
 }) {
-  console.log(canDelete)
-
   return (
     <form
       className={clsx(utils.card, utils.borderRadius, styles.form)}
