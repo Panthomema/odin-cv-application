@@ -7,21 +7,25 @@ import utils from '../styles/Utils.module.css';
 import styles from './FormManager.module.css';
 
 export default function FormManager({
-  resumeData,
+  resumeData: { personal, experience, education },
   onPersonalEdit,
   onExperienceCreate,
   onExperienceEdit,
   onExperienceDelete,
+  onEducationCreate,
+  onEducationEdit,
+  onEducationDelete,
 }) {
   const UI_STATES = {
     MAIN_MENU: { mode: 'main-menu' },
     EDIT_PERSONAL: { mode: 'edit-personal' },
     CREATE_EXPERIENCE: { mode: 'create-experience' },
     EDIT_EXPERIENCE: (id) => ({ mode: 'edit-experience', id: id }),
+    CREATE_EDUCATION: { mode: 'create-education' },
+    EDIT_EDUCATION: (id) => ({ mode: 'edit-education', id: id }),
   };
 
   const [uiState, setUiState] = useState(UI_STATES.MAIN_MENU);
-  const { personal, experience } = resumeData;
 
   const handleCancel = () => {
     setUiState(UI_STATES.MAIN_MENU);
@@ -45,7 +49,22 @@ export default function FormManager({
   const handleDeleteExperienceClick = (id) => {
     onExperienceDelete(id);
     setUiState(UI_STATES.MAIN_MENU);
-  }
+  };
+  
+  const handleCreateEducationSubmit = (newEducation) => {
+    onEducationCreate(newEducation);
+    setUiState(UI_STATES.MAIN_MENU);
+  };
+
+  const handleEditEducationSubmit = (id, updatedEducation) => {
+    onEducationEdit(id, updatedEducation);
+    setUiState(UI_STATES.MAIN_MENU);
+  };
+
+  const handleDeleteEducationClick = (id) => {
+    onEducationDelete(id);
+    setUiState(UI_STATES.MAIN_MENU);
+  };
 
   if (uiState.mode === UI_STATES.EDIT_PERSONAL.mode) {
     return (
@@ -72,6 +91,26 @@ export default function FormManager({
         experience={experience.find(({ id }) => uiState.id === id)}
         onSubmit={handleEditExperienceSubmit}
         onDelete={handleDeleteExperienceClick}
+        onCancel={handleCancel}
+      />
+    );
+  }
+
+  if (uiState.mode === UI_STATES.CREATE_EDUCATION.mode) {
+    return (
+      <CreateEducationForm
+        onSubmit={handleCreateEducationSubmit}
+        onCancel={handleCancel}
+      />
+    );
+  }
+
+  if (uiState.mode === UI_STATES.EDIT_EDUCATION().mode) {
+    return (
+      <EditEducationForm
+        educatione={education.find(({ id }) => uiState.id === id)}
+        onSubmit={handleEditEducationSubmit}
+        onDelete={handleDeleteEducationClick}
         onCancel={handleCancel}
       />
     );
@@ -114,6 +153,14 @@ export default function FormManager({
         onVisibilityToggle={onExperienceEdit}
         items={experience}
       />
+      <Widget
+        title="Education"
+        icon="school"
+        items={education}
+        onAddClick={() => setUiState(UI_STATES.CREATE_EDUCATION)}
+        onEditClick={(id) => setUiState(UI_STATES.EDIT_EDUCATION(id))}
+        onVisibilityToggle={onEducationEdit}
+      />
     </nav>
   );
 }
@@ -148,8 +195,8 @@ function Widget({
 
   const handleEditClick = (e, itemId) => {
     e.stopPropagation();
-    onEditClick(itemId)
-  }
+    onEditClick(itemId);
+  };
 
   const handleVisibilityToggle = (e, itemId, isVisible) => {
     e.stopPropagation();
@@ -187,7 +234,7 @@ function Widget({
               className={clsx(utils.card, styles.widgetItem)}
               onClick={(e) => handleEditClick(e, item.id)}
             >
-              <p>{item.companyName}</p>
+              <p>{item.companyName ? item.companyName : item.institution}</p>
               <span
                 className="material-symbols-outlined"
                 onClick={(e) =>
