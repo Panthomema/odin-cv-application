@@ -38,6 +38,13 @@ export default function App() {
     }));
   };
 
+  const deleteExperience = (id) => {
+    setResumeData((prevData) => ({
+      ...prevData,
+      experience: prevData.experience.filter((experience) => experience.id !== id),
+    }));
+  }
+
   return (
     <div className={styles.app}>
       <div className={clsx(styles.column, styles.controlsWrapper)}>
@@ -50,6 +57,7 @@ export default function App() {
             onPersonalEdit={updatePersonal}
             onExperienceCreate={addExperience}
             onExperienceEdit={updateExperience}
+            onExperienceDelete={deleteExperience}
           />
         </div>
       </div>

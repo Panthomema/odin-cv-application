@@ -8,7 +8,12 @@ import {
 } from '../utils/validation';
 import styles from './EditExperienceForm.module.css';
 
-export default function EditExperienceForm({ item, onSubmit, onCancel }) {
+export default function EditExperienceForm({
+  experience,
+  onSubmit,
+  onDelete,
+  onCancel,
+}) {
   const [errors, setErrors] = useState({});
   const startDateRef = useRef(null);
   const endDateRef = useRef(null);
@@ -107,7 +112,7 @@ export default function EditExperienceForm({ item, onSubmit, onCancel }) {
       formData.entries().map(([key, value]) => [key, value.trim()]),
     );
 
-    onSubmit(item.id, updatedExperience);
+    onSubmit(experience.id, updatedExperience);
   };
 
   return (
@@ -115,13 +120,15 @@ export default function EditExperienceForm({ item, onSubmit, onCancel }) {
       title="Edit Professional Experience"
       onSubmit={handleSubmit}
       onCancel={onCancel}
+      canDelete
+      onDeleteClick={() => onDelete(experience.id)}
     >
       <FormField
         name="companyName"
         type="text"
         label="Company Name"
         tag="required"
-        value={item.companyName}
+        value={experience.companyName}
         onBlur={handleBlur}
         constraints={constraints.companyName}
         error={errors.companyName}
@@ -131,7 +138,7 @@ export default function EditExperienceForm({ item, onSubmit, onCancel }) {
         type="text"
         label="Position"
         tag="recommended"
-        value={item.position}
+        value={experience.position}
         onBlur={handleBlur}
         constraints={constraints.position}
         error={errors.position}
@@ -141,7 +148,7 @@ export default function EditExperienceForm({ item, onSubmit, onCancel }) {
         type="text"
         label="Location"
         tag="optional"
-        value={item.location}
+        value={experience.location}
         onBlur={handleBlur}
         constraints={constraints.location}
         error={errors.location}
@@ -153,7 +160,7 @@ export default function EditExperienceForm({ item, onSubmit, onCancel }) {
           type="month"
           label="Start Date"
           tag="optional"
-          value={item.startDate}
+          value={experience.startDate}
           onBlur={handleDateBlur}
           constraints={constraints.startDate}
           error={errors.startDate}
@@ -164,7 +171,7 @@ export default function EditExperienceForm({ item, onSubmit, onCancel }) {
           type="month"
           label="End Date"
           tag="optional"
-          value={item.endDate}
+          value={experience.endDate}
           onBlur={handleDateBlur}
           constraints={constraints.endDate}
           error={errors.endDate}
@@ -175,7 +182,7 @@ export default function EditExperienceForm({ item, onSubmit, onCancel }) {
         type="textarea"
         label="Description"
         tag="recommended"
-        value={item.description}
+        value={experience.description}
         onBlur={handleBlur}
         constraints={constraints.description}
         error={errors.description}

@@ -11,6 +11,7 @@ export default function FormManager({
   onPersonalEdit,
   onExperienceCreate,
   onExperienceEdit,
+  onExperienceDelete,
 }) {
   const UI_STATES = {
     MAIN_MENU: { mode: 'main-menu' },
@@ -41,6 +42,11 @@ export default function FormManager({
     setUiState(UI_STATES.MAIN_MENU);
   };
 
+  const handleDeleteExperienceClick = (id) => {
+    onExperienceDelete(id);
+    setUiState(UI_STATES.MAIN_MENU);
+  }
+
   if (uiState.mode === UI_STATES.EDIT_PERSONAL.mode) {
     return (
       <EditPersonalForm
@@ -63,8 +69,9 @@ export default function FormManager({
   if (uiState.mode === UI_STATES.EDIT_EXPERIENCE().mode) {
     return (
       <EditExperienceForm
-        item={experience.find(({ id }) => uiState.id === id)}
+        experience={experience.find(({ id }) => uiState.id === id)}
         onSubmit={handleEditExperienceSubmit}
+        onDelete={handleDeleteExperienceClick}
         onCancel={handleCancel}
       />
     );
