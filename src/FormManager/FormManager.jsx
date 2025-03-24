@@ -1,9 +1,10 @@
 import clsx from 'clsx';
 import { useState } from 'react';
+import CreateEducationForm from '../CreateEducationForm/CreateEducationForm';
 import CreateExperienceForm from '../CreateExperienceForm/CreateExperienceForm';
+import EditEducationForm from '../EditEducationForm/EditEducationForm';
 import EditExperienceForm from '../EditExperienceForm/EditExperienceForm';
 import EditPersonalForm from '../EditPersonalForm/EditPersonalForm';
-import CreateEducationForm from '../CreateEducationForm/CreateEducationForm';
 import utils from '../styles/Utils.module.css';
 import styles from './FormManager.module.css';
 
@@ -51,7 +52,7 @@ export default function FormManager({
     onExperienceDelete(id);
     setUiState(UI_STATES.MAIN_MENU);
   };
-  
+
   const handleCreateEducationSubmit = (newEducation) => {
     onEducationCreate(newEducation);
     setUiState(UI_STATES.MAIN_MENU);
@@ -109,7 +110,7 @@ export default function FormManager({
   if (uiState.mode === UI_STATES.EDIT_EDUCATION().mode) {
     return (
       <EditEducationForm
-        educatione={education.find(({ id }) => uiState.id === id)}
+        education={education.find(({ id }) => uiState.id === id)}
         onSubmit={handleEditEducationSubmit}
         onDelete={handleDeleteEducationClick}
         onCancel={handleCancel}
@@ -235,7 +236,9 @@ function Widget({
               className={clsx(utils.card, styles.widgetItem)}
               onClick={(e) => handleEditClick(e, item.id)}
             >
-              <p>{item.companyName ? item.companyName : item.institutionName}</p>
+              <p>
+                {item.companyName ? item.companyName : item.institutionName}
+              </p>
               <span
                 className="material-symbols-outlined"
                 onClick={(e) =>
