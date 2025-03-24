@@ -3,6 +3,7 @@ import { useState } from 'react';
 import CreateExperienceForm from '../CreateExperienceForm/CreateExperienceForm';
 import EditExperienceForm from '../EditExperienceForm/EditExperienceForm';
 import EditPersonalForm from '../EditPersonalForm/EditPersonalForm';
+import CreateEducationForm from '../CreateEducationForm/CreateEducationForm';
 import utils from '../styles/Utils.module.css';
 import styles from './FormManager.module.css';
 
@@ -234,7 +235,7 @@ function Widget({
               className={clsx(utils.card, styles.widgetItem)}
               onClick={(e) => handleEditClick(e, item.id)}
             >
-              <p>{item.companyName ? item.companyName : item.institution}</p>
+              <p>{item.companyName ? item.companyName : item.institutionName}</p>
               <span
                 className="material-symbols-outlined"
                 onClick={(e) =>

@@ -1,0 +1,10 @@
+.inlineFields {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  gap: var(--spacing-ui);
+}
+
+.inlineFields div {
+  flex: 1;
+}

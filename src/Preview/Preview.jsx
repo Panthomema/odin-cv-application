@@ -146,7 +146,7 @@ function EducationSection({ education }) {
           <div className={styles.itemHeader}>
             <div>
               <p>
-                <strong>{item.institution}</strong>
+                <strong>{item.institutionName}</strong>
               </p>
               {item.title && (
                 <p>

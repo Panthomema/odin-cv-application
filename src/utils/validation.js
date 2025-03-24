@@ -19,6 +19,8 @@ export const constraints = {
   startDate: { min: minDate, max: maxDate },
   endDate: { min: minDate, max: maxDate },
   description: { minLength: 20, maxLength: 500 },
+  institutionName: { required: true, minLength: 3, maxLength: 60 },
+  title: { required: true, minLength: 3, maxLength: 60 },
 };
 
 export const errorMessages = {
@@ -64,6 +66,16 @@ export const errorMessages = {
   description: {
     tooShort: 'Description must be at least 10 characters.',
     tooLong: 'Description cannot exceed 500 characters.',
+  },
+  institutionName: {
+    valueMissing: 'Institution name is required.',
+    tooShort: 'Institution name must be at least 3 characters.',
+    tooLong: 'Institution name cannot exceed 60 characters.',
+  },
+  title: {
+    valueMissing: 'Title is required.',
+    tooShort: 'Title must be at least 3 characters.',
+    tooLong: 'Title cannot exceed 60 characters.',
   },
 };
 
