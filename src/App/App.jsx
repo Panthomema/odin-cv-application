@@ -34,11 +34,38 @@ export default function App() {
     }));
   };
 
-  const deleteExperience = (id) => {
+  const destroyExperience = (id) => {
     setResumeData((prevData) => ({
       ...prevData,
       experience: prevData.experience.filter(
         (experience) => experience.id !== id,
+      ),
+    }));
+  };
+
+  const storeEducation = (newEducation) => {
+    setResumeData((prevData) => ({
+      ...prevData,
+      education: [...(prevData.education ?? []), newEducation],
+    }));
+  };
+
+  const updateEducation = (id, updatedEducation) => {
+    setResumeData((prevData) => ({
+      ...prevData,
+      education: prevData.education.map((education) =>
+        education.id === id
+          ? { ...education, ...updatedEducation }
+          : education,
+      ),
+    }));
+  };
+
+  const destroyEducation = (id) => {
+    setResumeData((prevData) => ({
+      ...prevData,
+      education: prevData.education.filter(
+        (education) => education.id !== id,
       ),
     }));
   };
@@ -55,7 +82,10 @@ export default function App() {
             onPersonalEdit={updatePersonal}
             onExperienceCreate={storeExperience}
             onExperienceEdit={updateExperience}
-            onExperienceDelete={deleteExperience}
+            onExperienceDelete={destroyExperience}
+            onEducationCreate={storeEducation}
+            onEducationEdit={updateEducation}
+            onEducationDelete={destroyEducation}
           />
         </div>
       </div>
