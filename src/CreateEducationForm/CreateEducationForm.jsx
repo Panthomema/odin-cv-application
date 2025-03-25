@@ -6,7 +6,7 @@ import {
   errorMessages,
   getErrorMessage,
 } from '../utils/validation';
-import styles from './CreateEducationForm.module.css';
+import utils from '../styles/Utils.module.css';
 
 export default function CreateEducationForm({ onSubmit, onCancel }) {
   const [errors, setErrors] = useState({});
@@ -142,7 +142,7 @@ export default function CreateEducationForm({ onSubmit, onCancel }) {
         constraints={constraints.location}
         error={errors.location}
       />
-      <div className={styles.inlineFields}>
+      <div className={utils.inlineFields}>
         <FormField
           ref={startDateRef}
           name="startDate"

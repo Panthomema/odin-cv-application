@@ -2,11 +2,11 @@ import { useRef, useState } from 'react';
 import Form from '../Form/Form';
 import FormField from '../FormField/FormField';
 import {
-  constraints,
-  errorMessages,
-  getErrorMessage,
+    constraints,
+    errorMessages,
+    getErrorMessage,
 } from '../utils/validation';
-import styles from './CreateExperienceForm.module.css';
+import utils from '../styles/Utils.module.css';
 
 export default function CreateExperienceForm({ onSubmit, onCancel }) {
   const [errors, setErrors] = useState({});
@@ -146,7 +146,7 @@ export default function CreateExperienceForm({ onSubmit, onCancel }) {
         constraints={constraints.location}
         error={errors.location}
       />
-      <div className={styles.inlineFields}>
+      <div className={utils.inlineFields}>
         <FormField
           ref={startDateRef}
           name="startDate"

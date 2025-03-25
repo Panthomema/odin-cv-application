@@ -6,7 +6,7 @@ import {
   errorMessages,
   getErrorMessage,
 } from '../utils/validation';
-import styles from './EditExperienceForm.module.css';
+import utils from '../styles/Utils.module.css';
 
 export default function EditExperienceForm({
   experience,
@@ -153,7 +153,7 @@ export default function EditExperienceForm({
         constraints={constraints.location}
         error={errors.location}
       />
-      <div className={styles.inlineFields}>
+      <div className={utils.inlineFields}>
         <FormField
           ref={startDateRef}
           name="startDate"
