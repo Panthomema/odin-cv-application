@@ -43,7 +43,7 @@ export default function FormField({
           {...constraints}
         />
       )}
-      <span className={utils.formError}>{error}</span>
+      <span className={utils.formError} aria-live='polite'>{error}</span>
     </div>
   );
 }
