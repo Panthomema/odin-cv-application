@@ -1,5 +1,6 @@
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { useReactToPrint } from 'react-to-print';
 import FormManager from '../FormManager/FormManager';
 import Header from '../Header/Header';
 import Preview from '../Preview/Preview';
@@ -8,6 +9,9 @@ import styles from './App.module.css';
 
 export default function App() {
   const [resumeData, setResumeData] = useState(INITIAL_DATA);
+  const previewRef = useRef(null);
+
+  const handlePrint = useReactToPrint({ contentRef: previewRef });
 
   const updatePersonal = (updatedPersonal) => {
     setResumeData((prevData) => ({
@@ -54,9 +58,7 @@ export default function App() {
     setResumeData((prevData) => ({
       ...prevData,
       education: prevData.education.map((education) =>
-        education.id === id
-          ? { ...education, ...updatedEducation }
-          : education,
+        education.id === id ? { ...education, ...updatedEducation } : education,
       ),
     }));
   };
@@ -64,9 +66,7 @@ export default function App() {
   const destroyEducation = (id) => {
     setResumeData((prevData) => ({
       ...prevData,
-      education: prevData.education.filter(
-        (education) => education.id !== id,
-      ),
+      education: prevData.education.filter((education) => education.id !== id),
     }));
   };
 
@@ -74,7 +74,7 @@ export default function App() {
     <div className={styles.app}>
       <div className={clsx(styles.column, styles.controlsWrapper)}>
         <div className={styles.headerWrapper}>
-          <Header />
+          <Header onPrint={handlePrint} />
         </div>
         <div className={styles.formsWrapper}>
           <FormManager
@@ -90,7 +90,7 @@ export default function App() {
         </div>
       </div>
       <div className={clsx(styles.column, styles.previewWrapper)}>
-        <Preview resumeData={resumeData} />
+        <Preview resumeData={resumeData} ref={previewRef} />
       </div>
     </div>
   );

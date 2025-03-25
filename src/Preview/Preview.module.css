@@ -79,3 +79,11 @@
 .itemDate {
   color: var(--color-accent);
 }
+
+@media print {
+  .preview {
+    width: 100% !important;
+    height: 100% !important; 
+    transform: none !important;
+  }
+}

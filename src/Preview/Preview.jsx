@@ -7,6 +7,7 @@ const A4_HEIGHT = 1123;
 
 export default function Preview({
   resumeData: { personal, experience, education },
+  ref,
 }) {
   const [scale, setScale] = useState(1);
   const containerRef = useRef(null);
@@ -45,7 +46,11 @@ export default function Preview({
 
   return (
     <div className={styles.previewContainer} ref={containerRef}>
-      <div className={styles.preview} style={{ transform: `scale(${scale})` }}>
+      <div
+        className={styles.preview}
+        style={{ transform: `scale(${scale})` }}
+        ref={ref}
+      >
         <PersonalSection personal={personal} />
         <div className={styles.content}>
           <ExperienceSection experience={experience} />
@@ -171,4 +176,3 @@ function EducationSection({ education }) {
     </div>
   );
 }
-
