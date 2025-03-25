@@ -17,32 +17,19 @@ export default function Preview({
     const containerDiv = containerRef.current;
 
     const updateScale = () => {
-      if (containerDiv) {
-        const containerRect = containerDiv.getBoundingClientRect();
-        const newScale = containerRect.width / A4_WIDTH;
-        setScale(newScale);
-
-        // Adjust the container height (it would stay 1123px otherwise)
-        containerDiv.style.height = `${A4_HEIGHT * newScale}px`;
-      }
+      const containerRect = containerDiv.getBoundingClientRect();
+      const newScale = containerRect.width / A4_WIDTH;
+      setScale(newScale);
+      containerDiv.style.height = `${A4_HEIGHT * newScale}px`;
     };
 
-    // Initial calculation
     updateScale();
 
-    // Create ResizeObserver
-    const resizeObserver = new ResizeObserver(() => {
-      updateScale();
-    });
-
-    // Start observing
+    const resizeObserver = new ResizeObserver(updateScale);
     resizeObserver.observe(containerDiv);
 
-    // Clean up
-    return () => {
-      resizeObserver.disconnect();
-    };
-  }, [scale]);
+    return () => resizeObserver.disconnect();
+  }, []);
 
   return (
     <div className={styles.previewContainer} ref={containerRef}>
