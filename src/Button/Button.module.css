@@ -1,0 +1,24 @@
+.button {
+  font-size: 0.9rem;
+  padding: 0.4em 0.8em;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 0.2em;
+}
+
+.buttonPrimary {
+  background-color: var(--color-accent);
+  color: var(--color-ui);
+  font-weight: 600;
+}
+
+.buttonSecondary {
+  color: var(--color-text-secondary);
+}
+
+.buttonDelete {
+  background-color: var(--color-error);
+  color: var(--color-ui);
+  margin-right: auto;
+}

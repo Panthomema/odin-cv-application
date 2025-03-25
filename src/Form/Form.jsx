@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import utils from '../styles/Utils.module.css';
 import styles from './Form.module.css';
+import Button from '../Button/Button';
 
 export default function Form({
   title,
@@ -32,21 +33,5 @@ export default function Form({
         </Button>
       </div>
     </form>
-  );
-}
-
-function Button({ type, onClick, children, variant = 'primary' }) {
-  return (
-    <button
-      type={type}
-      className={clsx(styles.button, {
-        [styles.buttonPrimary]: variant === 'primary',
-        [styles.buttonSecondary]: variant === 'secondary',
-        [styles.buttonDelete]: variant === 'delete',
-      })}
-      onClick={onClick}
-    >
-      {children}
-    </button>
   );
 }
