@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import FormManager from '../components/FormManager/FormManager';
 import Header from '../components/Header/Header';
@@ -8,8 +8,15 @@ import { INITIAL_DATA } from '../utils/data';
 import styles from './App.module.css';
 
 export default function App() {
-  const [resumeData, setResumeData] = useState(INITIAL_DATA);
+  const savedData = JSON.parse(localStorage.getItem('resumeData'));
+
+  const [resumeData, setResumeData] = useState(savedData ?? INITIAL_DATA);
   const previewRef = useRef(null);
+
+
+  useEffect(() => {
+    localStorage.setItem('resumeData', JSON.stringify(resumeData))
+  }, [resumeData])
 
   const handlePrint = useReactToPrint({ contentRef: previewRef });
 

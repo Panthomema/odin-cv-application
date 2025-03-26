@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
 import utils from '../../styles/Utils.module.css';
 import {
-    constraints,
-    errorMessages,
-    getErrorMessage,
+  constraints,
+  errorMessages,
+  getErrorMessage,
 } from '../../utils/validation';
 import Form from '../Form/Form';
 import FormField from '../FormField/FormField';
