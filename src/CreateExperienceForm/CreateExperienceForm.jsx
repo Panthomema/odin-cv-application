@@ -2,9 +2,9 @@ import { useRef, useState } from 'react';
 import Form from '../Form/Form';
 import FormField from '../FormField/FormField';
 import {
-    constraints,
-    errorMessages,
-    getErrorMessage,
+  constraints,
+  errorMessages,
+  getErrorMessage,
 } from '../utils/validation';
 import utils from '../styles/Utils.module.css';
 
