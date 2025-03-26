@@ -6,7 +6,7 @@ const A4_WIDTH = 794;
 const A4_HEIGHT = 1123;
 
 export default function Preview({
-  resumeData: { personal, experience, education },
+  resumeData: { personal = {}, experience = [], education = [] },
   ref,
 }) {
   const [scale, setScale] = useState(1);

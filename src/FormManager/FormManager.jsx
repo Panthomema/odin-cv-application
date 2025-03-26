@@ -9,7 +9,7 @@ import utils from '../styles/Utils.module.css';
 import styles from './FormManager.module.css';
 
 export default function FormManager({
-  resumeData: { personal, experience, education },
+  resumeData: { personal = {}, experience = [], education = [] },
   onPersonalEdit,
   onExperienceCreate,
   onExperienceEdit,
