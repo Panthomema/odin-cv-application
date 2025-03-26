@@ -1,12 +1,12 @@
 import { useRef, useState } from 'react';
-import Form from '../Form/Form';
-import FormField from '../FormField/FormField';
+import utils from '../../styles/Utils.module.css';
 import {
   constraints,
   errorMessages,
   getErrorMessage,
 } from '../../utils/validation';
-import utils from '../../styles/Utils.module.css';
+import Form from '../Form/Form';
+import FormField from '../FormField/FormField';
 
 export default function CreateExperienceForm({ onSubmit, onCancel }) {
   const [errors, setErrors] = useState({});
@@ -61,8 +61,8 @@ export default function CreateExperienceForm({ onSubmit, onCancel }) {
 
     setErrors((prevErrors) => ({
       ...prevErrors,
-      startDate: startDateErrorMessage ?? prevErrors.startDate,
-      endDate: endDateErrorMessage ?? prevErrors.endDate,
+      startDate: startDateErrorMessage,
+      endDate: endDateErrorMessage,
     }));
   };
 

@@ -59,10 +59,12 @@ export default function CreateEducationForm({ onSubmit, onCancel }) {
         getErrorMessage(endDateField) ?? endDateField.validationMessage;
     }
 
+    console.log(startDateErrorMessage, endDateErrorMessage);
+
     setErrors((prevErrors) => ({
       ...prevErrors,
-      startDate: startDateErrorMessage ?? prevErrors.startDate,
-      endDate: endDateErrorMessage ?? prevErrors.endDate,
+      startDate: startDateErrorMessage,
+      endDate: endDateErrorMessage,
     }));
   };
 

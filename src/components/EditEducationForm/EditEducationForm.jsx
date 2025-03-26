@@ -1,12 +1,12 @@
 import { useRef, useState } from 'react';
+import utils from '../../styles/Utils.module.css';
+import {
+    constraints,
+    errorMessages,
+    getErrorMessage,
+} from '../../utils/validation';
 import Form from '../Form/Form';
 import FormField from '../FormField/FormField';
-import {
-  constraints,
-  errorMessages,
-  getErrorMessage,
-} from '../../utils/validation';
-import utils from '../../styles/Utils.module.css';
 
 export default function EditEducationForm({
   education,
@@ -66,8 +66,8 @@ export default function EditEducationForm({
 
     setErrors((prevErrors) => ({
       ...prevErrors,
-      startDate: startDateErrorMessage ?? prevErrors.startDate,
-      endDate: endDateErrorMessage ?? prevErrors.endDate,
+      startDate: startDateErrorMessage,
+      endDate: endDateErrorMessage,
     }));
   };
 
