@@ -15,7 +15,10 @@ A React-based CV Application built with Vite to practice client-side form valida
 
 - React
 - Vite
-- Tailwind CSS (if applicable)
+
+## Live Demo
+
+Check out the live version of the app: [Live Preview](https://odin-cv-application-xi.vercel.app/)
 
 ## Installation
 
@@ -55,9 +58,9 @@ A React-based CV Application built with Vite to practice client-side form valida
 
 ## Future Enhancements
 
-- Expand form to include work experience and education details
-- Improve form validation and error handling
-- Add support for exporting the CV as a PDF
+- Adding aesthetic customization options
+- Polishing UI adding animations
+- Implementing dark theme
 
 ## License
 
