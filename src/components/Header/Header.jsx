@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import utils from '../styles/Utils.module.css';
-import styles from './Header.module.css';
 import Button from '../Button/Button';
+import utils from '../../styles/Utils.module.css';
+import styles from './Header.module.css';
 
 export default function Header({ onPrint }) {
   return (

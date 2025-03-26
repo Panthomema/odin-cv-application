@@ -5,15 +5,10 @@ import {
   constraints,
   errorMessages,
   getErrorMessage,
-} from '../utils/validation';
-import utils from '../styles/Utils.module.css';
+} from '../../utils/validation';
+import utils from '../../styles/Utils.module.css';
 
-export default function EditExperienceForm({
-  experience,
-  onSubmit,
-  onDelete,
-  onCancel,
-}) {
+export default function CreateExperienceForm({ onSubmit, onCancel }) {
   const [errors, setErrors] = useState({});
   const startDateRef = useRef(null);
   const endDateRef = useRef(null);
@@ -108,27 +103,27 @@ export default function EditExperienceForm({
     }
 
     const formData = new FormData(form);
-    const updatedExperience = Object.fromEntries(
+    const newExperience = Object.fromEntries(
       formData.entries().map(([key, value]) => [key, value.trim()]),
     );
 
-    onSubmit(experience.id, updatedExperience);
+    newExperience.id = crypto.randomUUID();
+    newExperience.visible = true;
+
+    onSubmit(newExperience);
   };
 
   return (
     <Form
-      title="Edit Professional Experience"
+      title="Create Professional Experience"
       onSubmit={handleSubmit}
       onCancel={onCancel}
-      canDelete
-      onDeleteClick={() => onDelete(experience.id)}
     >
       <FormField
         name="companyName"
         type="text"
         label="Company Name"
         tag="required"
-        value={experience.companyName}
         onBlur={handleBlur}
         constraints={constraints.companyName}
         error={errors.companyName}
@@ -138,7 +133,6 @@ export default function EditExperienceForm({
         type="text"
         label="Position"
         tag="recommended"
-        value={experience.position}
         onBlur={handleBlur}
         constraints={constraints.position}
         error={errors.position}
@@ -148,7 +142,6 @@ export default function EditExperienceForm({
         type="text"
         label="Location"
         tag="optional"
-        value={experience.location}
         onBlur={handleBlur}
         constraints={constraints.location}
         error={errors.location}
@@ -160,7 +153,6 @@ export default function EditExperienceForm({
           type="month"
           label="Start Date"
           tag="optional"
-          value={experience.startDate}
           onBlur={handleDateBlur}
           constraints={constraints.startDate}
           error={errors.startDate}
@@ -171,7 +163,6 @@ export default function EditExperienceForm({
           type="month"
           label="End Date"
           tag="optional"
-          value={experience.endDate}
           onBlur={handleDateBlur}
           constraints={constraints.endDate}
           error={errors.endDate}
@@ -182,7 +173,6 @@ export default function EditExperienceForm({
         type="textarea"
         label="Description"
         tag="recommended"
-        value={experience.description}
         onBlur={handleBlur}
         constraints={constraints.description}
         error={errors.description}

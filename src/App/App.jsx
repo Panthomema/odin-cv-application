@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import { useRef, useState } from 'react';
 import { useReactToPrint } from 'react-to-print';
-import FormManager from '../FormManager/FormManager';
-import Header from '../Header/Header';
-import Preview from '../Preview/Preview';
+import FormManager from '../components/FormManager/FormManager';
+import Header from '../components/Header/Header';
+import Preview from '../components/Preview/Preview';
 import { INITIAL_DATA } from '../utils/data';
 import styles from './App.module.css';
 

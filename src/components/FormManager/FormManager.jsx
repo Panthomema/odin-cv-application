@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 import CreateEducationForm from '../CreateEducationForm/CreateEducationForm';
-import CreateExperienceForm from '../CreateExperienceForm/CreateExperienceForm';
 import EditEducationForm from '../EditEducationForm/EditEducationForm';
+import CreateExperienceForm from '../CreateExperienceForm/CreateExperienceForm';
 import EditExperienceForm from '../EditExperienceForm/EditExperienceForm';
 import EditPersonalForm from '../EditPersonalForm/EditPersonalForm';
-import utils from '../styles/Utils.module.css';
+import utils from '../../styles/Utils.module.css';
 import styles from './FormManager.module.css';
 
 export default function FormManager({

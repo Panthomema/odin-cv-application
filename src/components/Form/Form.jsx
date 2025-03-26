@@ -1,7 +1,7 @@
 import clsx from 'clsx';
-import utils from '../styles/Utils.module.css';
-import styles from './Form.module.css';
 import Button from '../Button/Button';
+import utils from '../../styles/Utils.module.css';
+import styles from './Form.module.css';
 
 export default function Form({
   title,

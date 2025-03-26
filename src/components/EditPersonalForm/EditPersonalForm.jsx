@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import Form from '../Form/Form';
 import FormField from '../FormField/FormField';
-import { constraints, getErrorMessage } from '../utils/validation';
+import { constraints, getErrorMessage } from '../../utils/validation';
 
 export default function EditPersonalForm({ data, onSubmit, onCancel }) {
   const [errors, setErrors] = useState({});
