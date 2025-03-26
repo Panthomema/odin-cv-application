@@ -13,6 +13,11 @@
     max-width: 100dvw;
   }
 
+  #root {
+    display: flex;
+    justify-content: center;
+  }
+
   button,
   input,
   textarea,
