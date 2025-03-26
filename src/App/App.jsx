@@ -13,10 +13,9 @@ export default function App() {
   const [resumeData, setResumeData] = useState(savedData ?? INITIAL_DATA);
   const previewRef = useRef(null);
 
-
   useEffect(() => {
-    localStorage.setItem('resumeData', JSON.stringify(resumeData))
-  }, [resumeData])
+    localStorage.setItem('resumeData', JSON.stringify(resumeData));
+  }, [resumeData]);
 
   const handlePrint = useReactToPrint({ contentRef: previewRef });
 
